@@ -1,0 +1,84 @@
+{% extends "::base.html.twig" %}
+{% block title %}{{ 'menu.contact'|trans }}{% endblock %}
+{% block body %}
+    <div class="container">
+        <div id="main">
+            <div class="travelo-google-map block"></div>
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <div class="travelo-box contact-us-box">
+                        <h4>{{ 'menu.contact'|trans }}</h4>
+                        <ul class="contact-address">
+                            <li class="address">
+                                <i class="soap-icon-address circle"></i>
+                                <h5 class="title">{{ 'contact.address'|trans }}</h5>
+                                <p>La Soukra 2036, Ariana TUNISIA</p>
+                                <p>60, Av de l'UMA, Bureau N° 4.</p>
+                            </li>
+                            <li class="phone">
+                                <i class="soap-icon-phone circle"></i>
+                                <h5 class="title">{{ 'contact.phone'|trans }}</h5>
+                                <p>+216 71 940 299</p>
+                            </li>
+                            <li class="email">
+                                <i class="soap-icon-message circle"></i>
+                                <h5 class="title">Email</h5>
+                                <p>info@netmarketing-tn.com</p>
+                            </li>
+                        </ul>
+                        <ul class="social-icons full-width">
+                            <li><a href="#" data-toggle="tooltip" title="Twitter"><i class="soap-icon-twitter"></i></a></li>
+                            <li><a href="#" data-toggle="tooltip" title="GooglePlus"><i class="soap-icon-googleplus"></i></a></li>
+                            <li><a href="#" data-toggle="tooltip" title="Facebook"><i class="soap-icon-facebook"></i></a></li>
+                            <li><a href="#" data-toggle="tooltip" title="Linkedin"><i class="soap-icon-linkedin"></i></a></li>
+                            <li><a href="#" data-toggle="tooltip" title="Vimeo"><i class="soap-icon-vimeo"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    {% include '::alert.html.twig' %}
+                    <div class="travelo-box">
+                        <form class="contact-form" action="{{ path('contact') }}" method="post">
+                            <h4 class="box-title">{{ 'contact.sendUsMessage'|trans }}</h4>
+                            <div class="row form-group">
+                                <div class="col-xs-6">
+                                    <label>{{ 'contact.yourName'|trans }}</label>
+                                    <input type="text" required name="nom" class="input-text full-width">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>{{ 'contact.yourEmail'|trans }}</label>
+                                    <input type="email" required name="Email" class="input-text full-width">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>{{ 'contact.yourMessage'|trans }}</label>
+                                <textarea required name="message" rows="6" class="input-text full-width" placeholder="{{ 'contact.writeMessaHere'|trans }}"></textarea>
+                            </div>
+                            <button type="submit" class="btn-large full-width">{{ 'contact.sendMessage'|trans }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}    
+{% block javascripts %}
+    {{ parent() }}
+    <script type = "text/javascript" >
+        tjq(".travelo-google-map").gmap3({
+            map: {
+                options: {
+                    center: [36.863854, 10.215827],
+                    zoom: 14
+                }
+            },
+            marker: {
+                values: [{latLng: [36.863854, 10.215827], data: "NetMarketing"}],
+                options: {
+                    draggable: false
+                },
+            }
+        });
+    </script>
+{% endblock %}

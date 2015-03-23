@@ -1,0 +1,17 @@
+<div id="photos-tab" class="tab-pane fade in active">
+    <div class="photo-gallery style1" data-animation="slide" data-sync="#photos-tab .image-carousel">
+        <ul class="slides" style="text-align: center;">
+            {% for image in hotel.HotelImages.HotelImage if image.type==0 %}
+                {% set img = image.url|split('_b') %}
+                <li><img src="{{ img[0]~'_y'~img[1]}}" style="width:500px;height:333px;" /></li>
+                {% endfor %}
+        </ul>
+    </div>
+    <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
+        <ul class="slides">
+            {% for image in hotel.HotelImages.HotelImage if image.type==0 %}
+                <li><img src="{{ image.thumbnailUrl }}" /></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

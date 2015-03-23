@@ -1,0 +1,50 @@
+{% extends "::base.html.twig" %}
+{% block title %}{{ 'currency.title'|trans }}{% endblock %}
+{% block body %}
+    <div class="global-map-area promo-box parallax" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="content-section description pull-right col-sm-9">
+                <div class="table-wrapper hidden-table-sm">
+                    <div class="table-cell">
+                        <h2 class="m-title">
+                            {{ 'currency.chooseyour'|trans }}  <br /><em>{{ 'currency.currency'|trans }}</em>
+                        </h2>
+                    </div>
+                    <div class="table-cell action-section col-md-4 no-float">
+                        <form method="post" action="{{ path('currency',{'idhotel':idhotel,'stars':stars,'currency':currency,'arrivalDate':arrivalDate2,'departureDate':departureDate2,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'rateKey':rateKey,'roomTypeCode':roomTypeCode,'rateCode':rateCode,'chargeableRate':chargeableRate}) }}">
+                            <div class="row">
+                                <div class="col-xs-6 col-md-12">
+                                    <select class="input-text full-width" placeholder="{{ 'accueil.enter_a_destination'|trans }}" name="currencyCode" required>
+                                        <optgroup label="Afrique">
+                                            <option value="TND" {% if currency=='TND' %}selected{% endif %}>Dinar tunisien</option>
+                                        </optgroup>
+                                        <optgroup label="Europe">
+                                            <option value="EUR" {% if currency=='EUR' %}selected{% endif %}>EUR Euro</option>
+                                            <option value="GBP" {% if currency=='GBP' %}selected{% endif %}>Britsh Pound</option>
+                                            <option value="CHF" {% if currency=='CHF' %}selected{% endif %}>Swiss Franc</option>
+                                        </optgroup>
+                                        <optgroup label="North America">
+                                            <option value="CAD" {% if currency=='CAD' %}selected{% endif %}>Canadian Dollar</option>
+                                            <option value="USD" {% if currency=='USD' %}selected{% endif %}>US Dollar</option>
+                                        </optgroup>
+                                        <optgroup label="Asia">
+                                            <option value="JPY" {% if currency=='JPY' %}selected{% endif %}>Japanese Yen</option>
+                                            <option value="CNY" {% if currency=='CNY' %}selected{% endif %}>Chinese Yuan Renminbi</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="col-xs-6 col-md-12">
+                                    <button class="full-width btn-large">{{ 'book.confirmbooking'|trans }}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="image-container col-sm-4">
+                <img src="http://placehold.it/342x258" alt="" width="342" height="258" />
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

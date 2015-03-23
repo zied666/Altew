@@ -1,0 +1,13 @@
+<div class="tab-pane fade" id="hotel-amenities">
+    <h2>{{ 'hotel.amenities'|trans }}</h2>
+    {% if hotel.HotelDetails.amenitiesDescription is defined %}
+        <p>{{ hotel.HotelDetails.amenitiesDescription|raw }}</p>
+    {% endif %}
+    <ul class="amenities clearfix style2">
+        {% for amenity in hotel.PropertyAmenities.PropertyAmenity %}
+            <li class="col-md-4 col-sm-6">
+                <div class="icon-box style2">{{ amenity.amenity }}</div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

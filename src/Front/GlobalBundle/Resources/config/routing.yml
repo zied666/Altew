@@ -1,0 +1,62 @@
+front_global_homepage:
+    path:     /
+    defaults: { _controller: FrontGlobalBundle:Default:index }
+
+contact:
+    path:     /contact
+    defaults: { _controller: FrontGlobalBundle:Default:contact }
+
+GenerateUrl:
+    path:     /generateurl
+    defaults: { _controller: FrontGlobalBundle:Hotels:generate }
+
+
+EditHotel:
+    path:     /EditHotel
+    defaults: { _controller: FrontGlobalBundle:Details:edit }  
+
+TravelNow:
+    path:     /TravelNow
+    defaults: { _controller: FrontGlobalBundle:Book:travelNow }  
+
+validation:
+    path:     /validation/{idhotel}/{stars}/{currency}/{arrivalDate}/{departureDate}/{room1}/{room2}/{room3}/{room4}/{room5}/{rateKey}/{roomTypeCode}/{rateCode}/{chargeableRate}
+    defaults: { _controller: FrontGlobalBundle:Book:validation }  
+    requirements:
+        currency: EUR|GBP|CHF|CAD|USD|JPY|CNY|TND
+
+currency:
+    path:     /Currency/{idhotel}/{stars}/{currency}/{arrivalDate}/{departureDate}/{room1}/{room2}/{room3}/{room4}/{room5}/{rateKey}/{roomTypeCode}/{rateCode}/{chargeableRate}
+    defaults: { _controller: FrontGlobalBundle:Book:currecy }  
+    requirements:
+        currency: EUR|GBP|CHF|CAD|USD|JPY|CNY|TND
+
+Booking:
+    path:     /Booking/{idhotel}/{stars}/{currency}/{arrivalDate}/{departureDate}/{room1}/{room2}/{room3}/{room4}/{room5}/{rateKey}/{roomTypeCode}/{rateCode}/{chargeableRate}
+    defaults: { _controller: FrontGlobalBundle:Book:book }  
+    requirements:
+        currency: EUR|GBP|CHF|CAD|USD|JPY|CNY|TND
+
+TravelNowAjax:
+    path:     /TravelNowAjax
+    defaults: { _controller: FrontGlobalBundle:Book:travelNowAjax }  
+  
+detailshotel:
+    path:     /hotel/{idhotel}/{stars}/{currency}/{arrivalDate}/{departureDate}/{room1}/{room2}/{room3}/{room4}/{room5}
+    defaults: { _controller: FrontGlobalBundle:Details:index,room2:0,room3:0,room4:0,room5:0}    
+    
+listehotels:     
+    path:     /liste/{currency}/{destination}/{arrivalDate}/{departureDate}/{room1}/{room2}/{room3}/{room4}/{room5}/{page}/{sort}/{stars}/{rate}/{search}
+    defaults: { _controller: FrontGlobalBundle:Hotels:liste,room2:0,room3:0,room4:0,room5:0,page:1,sort:NOSORT,search:NULL,stars:-,rate:- }
+    requirements:
+        currency: EUR|GBP|CHF|CAD|USD|JPY|CNY|TND
+        sort:  PRICE_AVERAGE|PRICE_REVERSE|PROMO|ALPHA|NOSORT
+    
+filtrehotels:     
+    path:     /filtres/{currency}/{destination}/{arrivalDate}/{departureDate}/{room1}/{room2}/{room3}/{room4}/{room5}/{page}/{sort}/{stars}/{rate}/{search}
+    defaults: { _controller: FrontGlobalBundle:Hotels:filtre,room2:0,room3:0,room4:0,room5:0,page:1,sort:NOSORT,search:NULL,stars:-,rate:- }
+    requirements:
+        currency: EUR|GBP|CHF|CAD|USD|JPY|CNY|TND
+        sort:  PRICE_AVERAGE|PRICE_REVERSE|PROMO|ALPHA|NOSORT
+
+   

@@ -1,0 +1,64 @@
+{% set img = hotel.thumbNailUrl|split('_t') %}
+{% set AvgRate = hotel.RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.ChargeableRateInfo['@averageRate']  %}
+{% set AvgBaseRate = hotel.RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.ChargeableRateInfo['@averageBaseRate']  %}
+{% set currencyCode = hotel.RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode']  %}
+{% set Stars = (hotel.hotelRating/5)*100 %}
+{% set Promo = hotel.RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo['@promo'] %}
+{% if Promo=="true" and hotel.RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.promoDescription is defined %}
+    {% set MessagePromo = hotel.RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.promoDescription %}
+{% endif %}
+<article class="box {% if Promo=="true" and MessagePromo is defined and MessagePromo|length<=10 %}has-discount{% endif %}">
+    <figure class="col-sm-5 col-md-4">
+        <a href="{{ path('detailshotel',{'idhotel':hotel.hotelId,'stars':hotel.hotelRating,'currency':currency,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5}) }}" class="hover-effect">
+            <img width="290px" height="196px" style="width: 290px;height: 196px;" src="{{ 'http://images.travelnow.com'~img[0]~'_b'~img[1]}}">
+            {% if Promo=="true" and MessagePromo is defined and MessagePromo|length<=10 %}
+                <span class="discount">
+                    <span class="discount-text" style="font-size: 16px;">
+                        {{ MessagePromo }}
+                    </span>
+                </span>
+            {% endif %}
+        </a>
+    </figure>
+    <div class="details col-sm-7 col-md-8">
+        <div>
+            <div>
+                <h4  class="box-title animated pull-left" data-animation-type="fadeInUp">
+                    {{ hotel.name |raw }}
+                    <small>
+                        <i class="soap-icon-departure yellow-color"></i>
+                        <strong style="font-size: 12px;">{{ hotel.city }}</strong>, {% if hotel.postalCode is defined %}{{ hotel.postalCode|raw  }}{% endif %} {{ hotel.address1|raw }}, {{ hotel.locationDescription|raw  }}
+                    </small>
+                    {% if Promo=="true" and  MessagePromo is defined  %}
+                        <small style="color: red;font-size: 11px">
+                            <i class="soap-icon-party red-color "></i>
+                            {{ MessagePromo }}
+                        </small>
+                    {% endif %}
+                </h4>
+            </div>
+            <div>
+                <div class="five-stars-container">
+                    <span class="five-stars animated pull-left" data-animation-type="fadeInDown" data-animation-duration="1" data-animation-delay="0" style="width: {{Stars}}%;"></span>
+                </div>
+                {% if hotel.tripAdvisorReviewCount is defined %}
+                    <span class="review">{{ hotel.tripAdvisorReviewCount }} {{ 'hotellist.reviews'|trans }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            {{ hotel.shortDescription|raw  }}
+            <div>
+
+                <span class="price"><small>{{ 'hotellist.avg'|trans }}</small>
+                    {% if Promo =='true' %}<span style="font-size: 15px;color: red;"><strike>{{ AvgBaseRate|number_format(0, '.', '') }}</strike></span>{% endif %}
+                    <span style="font-size: 16px;">
+                        {{ AvgRate|number_format(0, '.', '')~' '~currencyCode }}
+                    </span>
+                </span>
+                <a class="button btn-small dark-blue1 popup-map" href="#" data-box="{{ hotel.latitude~', '~hotel.longitude }}">{{ 'hotellist.map'|trans }}</a>
+                <a class="button btn-small full-width text-center dark-blue1" title="" href="{{ path('detailshotel',{'idhotel':hotel.hotelId,'stars':hotel.hotelRating,'currency':currency,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5}) }}">{{ 'hotellist.select'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</article>

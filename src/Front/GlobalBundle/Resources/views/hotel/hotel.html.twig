@@ -1,0 +1,122 @@
+{% extends "::base.html.twig" %}
+{% block title %}{{ hotel.hotelName }}{% endblock %}
+{% block body %}
+    {% set Stars = (stars/5)*100 %}
+    <div class="container">
+        <div class="row">
+            <div id="main" class="col-md-9">
+                <div class="tab-container style1" id="hotel-main-content">
+                    <div class="tab-content">
+                        {% include 'FrontGlobalBundle:hotel:slider.html.twig' %}
+                    </div>
+                </div>
+                <div id="hotel-features" class="tab-container">
+                    <ul class="tabs">
+                        <li class="active"><a href="#hotel-availability" data-toggle="tab">{{ 'hotel.availability'|trans }}</a></li>
+                        <li><a href="#hotel-description" data-toggle="tab">{{ 'hotel.description'|trans }}</a></li>
+                        <li><a href="#hotel-amenities" data-toggle="tab">{{ 'hotel.amenities'|trans }}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        {% include 'FrontGlobalBundle:hotel:rooms.html.twig' %}
+                        {% include 'FrontGlobalBundle:hotel:description.html.twig' %}
+                        {% include 'FrontGlobalBundle:hotel:amenities.html.twig' %}
+                    </div>
+
+                </div>
+            </div>
+            {% include 'FrontGlobalBundle:hotel:sidebar.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        tjq(document).ready(function () {
+            tjq("#rooms").on('change', function () {
+                var nbrRooms = tjq(this).val();
+                Block = tjq(this).parent().parent().parent().parent();
+                var exist = Block.children().length;
+                console.log("existe: " + exist);
+                if (exist < nbrRooms)
+                {
+                    for (var i = 2; i <= nbrRooms; i++)
+                    {
+                        if (i > exist)
+                        {
+                            console.log("add" + i);
+                            Block.append('<div class="row mrg-t-15"><div class="col-md-2"></div><div class="col-md-1"><label>{{ 'accueil.adults'|trans }}</label><div class="selector"><select class="full-width" name="adulteRoom' + i + '"><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option></select><span class="custom-select full-width">01</span></div></div><div class="col-md-1"><label>{{ 'accueil.kids'|trans }}</label><div class="selector"><select data-chambre="' + i + '" class="full-width Kids" name="enfantRoom' + i + '"><option value="0">0</option><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option><option value="5">05</option></select><span class="custom-select full-width">0</span></div></div><div class="col-md-1 AgeSeparator"></div></div>');
+                        }
+                    }
+                }
+                else
+                {
+                    var toRemove = (exist - nbrRooms);
+                    var nmbr = Block.children().length;
+
+
+                    for (var i = nmbr; i >= (nmbr - toRemove); i--)
+                        Block.children().eq(i).remove();
+                }
+            })
+            tjq(".Kids").live('change', function () {
+                var nbrKids = parseInt(tjq(this).val());
+                Block = tjq(this).parent().parent().parent();
+                var exist = Block.children().length - 4;
+                var idchambre = tjq(this).data('chambre');
+                if (exist < nbrKids) {
+                    for (var i = 1; i <= nbrKids; i++)
+                    {
+                        if (i > exist)
+                            Block.children(".AgeSeparator").parent().append('<div class="col-md-1"><label>Age ' + i + '</label><div class="selector"><select class="full-width" name="chambre' + idchambre + 'age' + i + '" required ><option value="">--</option>{% for age in 1..17 %}<option value="{{ age }}">{{ age }}</option>{% endfor %}</select><span class="custom-select full-width">--</span></div></div>');
+                    }
+                }
+                else
+                {
+                    var toRemove = (exist - nbrKids);
+                    var nmbr = Block.children().length;
+                    for (var i = nmbr; i >= (nmbr - toRemove); i--)
+                        Block.children().eq(i).remove();
+                }
+
+
+            })
+            tjq('#HotelForm').on('submit', function (e) {
+                var fullDate = new Date()
+                var twoDigitMonth = ((fullDate.getMonth().length + 1) === 1) ? (fullDate.getMonth() + 1) : '0' + (fullDate.getMonth() + 1);
+                var twoDigitDate = ((fullDate.getDate().length + 1) === 1) ? (fullDate.getDate()) : (fullDate.getDate());
+                var currentDate = fullDate.getFullYear() + "-" + twoDigitMonth + "-" + twoDigitDate;
+                var arrivalDate = tjq('#arrivalDate').val().split("/");
+                var arrival = arrivalDate[2] + "-" + arrivalDate[0] + "-" + arrivalDate[1]
+                var departureDate = tjq('#departureDate').val().split("/");
+                var departure = departureDate[2] + "-" + departureDate[0] + "-" + departureDate[1]
+                if (arrival <= currentDate)
+                {
+                    e.preventDefault();
+                    tjq(".alert-error").show();
+                    tjq("#TextAlert").html("{{ 'accueil.message.error2'|trans }}");
+                }
+                else if (arrival >= departure)
+                {
+                    e.preventDefault();
+                    tjq(".alert-error").show();
+                    tjq("#TextAlert").html("{{ 'accueil.message.error1'|trans }}");
+                }
+                else
+                    return true;
+            })
+            tjq(".TravelNowBook").click(function () {
+                var href = tjq(this).data('href');
+                tjq(this).html("Loading...")
+                tjq.ajax({
+                    url: '{{ path('TravelNowAjax') }}',
+                    data: {'href': href},
+                    type: 'POST',
+                    dataType: 'html',
+                    success: function (data) {
+                        tjq(location).attr('href', "{{ path('TravelNow') }}");
+                    }
+                });
+            })
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,22 @@
+<div class="topnav hidden-xs">
+    <div class="container">
+        <ul class="quick-menu pull-left">
+            <li><a href="javascript:void(0)" >{{ 'topnav.message'|trans }}</a></li>
+        </ul>
+        <ul class="quick-menu pull-right">
+            <li class="ribbon">
+                <a href="#">
+                    {% if app.request.getLocale()=='fr' %}
+                        Français
+                    {% elseif app.request.getLocale()=='en' %}
+                        English
+                    {% endif %}
+                </a>
+                <ul class="menu mini">
+                    <li {% if app.request.getLocale()=='en' %}class="active"{% endif %}><a href="{{ path('front_global_homepage',{'_locale':'en'}) }}">English</a></li>
+                    <li {% if app.request.getLocale()=='fr' %}class="active"{% endif %}><a href="{{ path('front_global_homepage',{'_locale':'fr'}) }}">Français</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

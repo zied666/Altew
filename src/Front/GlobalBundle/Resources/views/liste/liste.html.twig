@@ -1,0 +1,57 @@
+{% extends "::base.html.twig" %}
+{% block title %}{{ 'hotellist.hotelsearch'|trans }}{% endblock %}
+{% block body %}
+    <div class="container">
+        <div id="main">
+            <div class="row image-box">
+                <div class="col-sm-4 col-md-3">
+                    {% include 'FrontGlobalBundle:liste:filtre.html.twig' %}
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    {% include 'FrontGlobalBundle:liste:sort.html.twig' %}
+                    <div class="hotel-list listing-style3 hotel">
+                        {% if list.HotelListResponse.HotelList.HotelSummary.thumbNailUrl is defined %}
+                            {% set hotel=list.HotelListResponse.HotelList.HotelSummary %}
+                            {% include 'FrontGlobalBundle:liste:article.html.twig' %}  
+                        {% elseif list.HotelListResponse.HotelList.HotelSummary is defined %}
+                            {% for hotel in list.HotelListResponse.HotelList.HotelSummary %}
+                                {% include 'FrontGlobalBundle:liste:article.html.twig' %}                            
+                            {% endfor %}
+                        {% else %}
+                            {% include '::alert.html.twig' %}
+                        {% endif %}
+                    </div>
+                    <ul class="pagination clearfix">
+                        {% if page==1  %}
+                            <li class="first disabled">
+                                <a href="javascript:void(0)">
+                                    {{ 'hotellist.page.first'|trans }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="first ">
+                                <a href="{{ path('listehotels',{'currency':currency,'destination':destination,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'page':1,'sort':'NOSORT','search':search,'stars':stars,'rate':rate,}) }}">
+                                    {{ 'hotellist.page.first'|trans }}
+                                </a>
+                            </li>
+                            <li class="prev"><a href="{{ path('listehotels',{'currency':currency,'destination':destination,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'page':page-1,'sort':'NOSORT','search':search,'stars':stars,'rate':rate,}) }}">{{ 'hotellist.page.previous'|trans }}</a></li>
+                        {% endif %}
+                        {% for i in 1..page %}
+                            {% if i==page %}
+                                <li class="active"><a href="javascript:void(0)">{{ i }}</a></li>
+                            {% else %}
+                                <li class=""><a href="{{ path('listehotels',{'currency':currency,'destination':destination,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'page':i,'sort':'NOSORT','search':search,'stars':stars,'rate':rate,}) }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if list.HotelListResponse.HotelList['@size'] is not defined or  list.HotelListResponse.HotelList['@size']<20 %}
+                            <li class="next disabled"><a href="javascript:void(0)">{{ 'hotellist.page.next'|trans }}</a></li>
+                        {% else %}
+                            <li class="next"><a href="{{ path('listehotels',{'currency':currency,'destination':destination,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'page':page+1,'sort':'NOSORT','search':search,'stars':stars,'rate':rate,}) }}">{{ 'hotellist.page.next'|trans }}</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}    

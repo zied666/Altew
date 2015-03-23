@@ -1,0 +1,15 @@
+<div class="tab-pane fade in active" id="hotel-availability">
+    {% include 'FrontGlobalBundle:hotel:edit.html.twig' %}
+    <h2>{{ 'hotel.AvailableRooms'|trans }}</h2>
+    <div class="room-list listing-style3 hotel">
+        {% if hotel.HotelRoomResponse.rateCode is defined %}
+            {% set room=hotel.HotelRoomResponse %}
+            {% include 'FrontGlobalBundle:hotel:oneRoom.html.twig' %}
+        {% else %}
+            {% for room in hotel.HotelRoomResponse %}
+                {% include 'FrontGlobalBundle:hotel:oneRoom.html.twig' %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+</div>

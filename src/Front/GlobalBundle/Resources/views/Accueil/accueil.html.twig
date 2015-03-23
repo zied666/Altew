@@ -1,0 +1,197 @@
+{% extends "::base.html.twig" %}
+{% block title %}{{ 'accueil.accueil'|trans }}{% endblock %}
+{% block topbody %}{% include 'FrontGlobalBundle:Accueil:slider.html.twig' %}{% endblock %}
+{% block body %}
+    <div class="search-box-wrapper">
+        <div class="search-box container">
+            <ul class="search-tabs clearfix">
+                <li class="active"><a href="#hotels-tab" data-toggle="tab">HOTELS</a></li>
+            </ul>
+            <div class="visible-mobile">
+                <ul id="mobile-search-tabs" class="search-tabs clearfix">
+                    <li class="active"><a href="#hotels-tab">HOTELS</a></li>
+                </ul>
+            </div>           
+            <div class="search-tab-content">
+                {% include '::alert.html.twig' %}
+                <div class="tab-pane fade active in" id="hotels-tab">
+                    <form id="HotelForm" action="{{ path('GenerateUrl') }}" method="post">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-error" style="display: none">
+                                    <p id="TextAlert"> </p>
+                                    <span class="close"></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6 col-md-3">
+                                <h4 class="title">{{ 'accueil.currency'|trans }}</h4>
+                                <label>{{ 'accueil.select_your_currency'|trans }}</label>
+                                <select class="input-text full-width" placeholder="{{ 'accueil.enter_a_destination'|trans }}" name="currencyCode" required>
+                                    <optgroup label="Europe">
+                                        <option value="EUR">EUR Euro</option>
+                                        <option value="GBP">Britsh Pound</option>
+                                        <option value="CHF">Swiss Franc</option>
+                                    </optgroup>
+                                    <optgroup label="North America">
+                                        <option value="CAD">Canadian Dollar</option>
+                                        <option value="USD">US Dollar</option>
+                                    </optgroup>
+                                    <optgroup label="Asia">
+                                        <option value="JPY">Japanese Yen</option>
+                                        <option value="CNY">Chinese Yuan Renminbi</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-6 col-md-3">
+                                <h4 class="title">{{ 'accueil.where'|trans }}</h4>
+                                <label>{{ 'accueil.yourdestination'|trans }}</label>
+                                <input type="text" class="input-text full-width" placeholder="{{ 'accueil.enter_a_destination'|trans }}" name="destinationString" required />
+                            </div>
+                            <div class="form-group col-sm-6 col-md-4">
+                                <h4 class="title">{{ 'accueil.when'|trans }}</h4>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <label>{{ 'accueil.checkin'|trans }}</label>
+                                        <div class="datepicker-wrap">
+                                            <input type="text" class="input-text full-width" placeholder="mm/dd/yy" id="arrivalDate" name="arrivalDate" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label>{{ 'accueil.checkout'|trans }}</label>
+                                        <div class="datepicker-wrap">
+                                            <input type="text" class="input-text full-width" placeholder="mm/dd/yy" id="departureDate" name="departureDate" required  />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6 col-md-2 fixheight">
+                                <label class="hidden-xs">&nbsp;</label>
+                                <button type="submit" class="full-width icon-check animated" data-animation-type="bounce" data-animation-duration="1">{{ 'accueil.searchnow'|trans }}</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <h4 class="title">{{ 'accueil.who'|trans }}</h4>
+                                <div class="row mrg-t-15">
+                                    <div class="col-md-2">
+                                        <label>{{ 'accueil.rooms'|trans }}</label>
+                                        <div class="selector">
+                                            <select class="full-width" name="rooms" id="rooms">
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label>{{ 'accueil.adults'|trans }}</label>
+                                        <div class="selector">
+                                            <select class="full-width" name="adulteRoom1">
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label>{{ 'accueil.kids'|trans }}</label>
+                                        <div class="selector">
+                                            <select class="full-width Kids" name="enfantRoom1" data-chambre="1">
+                                                <option value="0">0</option>
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 AgeSeparator"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'FrontGlobalBundle:Accueil:animation.html.twig' %}
+    {% include 'FrontGlobalBundle:Accueil:partenaire.html.twig' %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        tjq(document).ready(function () {
+            tjq("#rooms").on('change', function () {
+                var nbrRooms = tjq(this).val();
+                Block = tjq(this).parent().parent().parent().parent();
+                var exist = Block.children().length - 1;
+                if (exist < nbrRooms)
+                {
+                    for (var i = 2; i <= nbrRooms; i++)
+                    {
+                        if (i > exist)
+                            Block.append('<div class="row mrg-t-15"><div class="col-md-2"></div><div class="col-md-1"><label>{{ 'accueil.adults'|trans }}</label><div class="selector"><select class="full-width" name="adulteRoom' + i + '"><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option></select><span class="custom-select full-width">01</span></div></div><div class="col-md-1"><label>{{ 'accueil.kids'|trans }}</label><div class="selector"><select data-chambre="' + i + '" class="full-width Kids" name="enfantRoom' + i + '"><option value="0">0</option><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option><option value="5">05</option></select><span class="custom-select full-width">0</span></div></div><div class="col-md-1 AgeSeparator"></div></div>');
+                    }
+                }
+                else
+                {
+                    var toRemove = (exist - nbrRooms);
+
+                    var nmbr = Block.children().length;
+                    for (var i = nmbr; i >= (nmbr - toRemove); i--)
+                        Block.children().eq(i).remove();
+                }
+            })
+            tjq(".Kids").live('change', function () {
+                var nbrKids = parseInt(tjq(this).val());
+                Block = tjq(this).parent().parent().parent();
+                var exist = Block.children().length - 4;
+                var idchambre = tjq(this).data('chambre');
+                if (exist < nbrKids) {
+                    for (var i = 1; i <= nbrKids; i++)
+                    {
+                        if (i > exist)
+                            Block.children(".AgeSeparator").parent().append('<div class="col-md-1"><label>Age ' + i + '</label><div class="selector"><select class="full-width" name="chambre' + idchambre + 'age' + i + '" required ><option value="">--</option>{% for age in 1..17 %}<option value="{{ age }}">{{ age }}</option>{% endfor %}</select><span class="custom-select full-width">--</span></div></div>');
+                    }
+                }
+                else
+                {
+                    var toRemove = (exist - nbrKids);
+                    var nmbr = Block.children().length;
+                    for (var i = nmbr; i >= (nmbr - toRemove); i--)
+                        Block.children().eq(i).remove();
+                }
+
+
+            })
+            tjq('#HotelForm').on('submit', function (e) {
+                var fullDate = new Date()
+                var twoDigitMonth = ((fullDate.getMonth().length + 1) === 1) ? (fullDate.getMonth() + 1) : '0' + (fullDate.getMonth() + 1);
+                var twoDigitDate = ((fullDate.getDate().length + 1) === 1) ? (fullDate.getDate()) :  (fullDate.getDate());
+                var currentDate = fullDate.getFullYear() + "-" + twoDigitMonth + "-" + twoDigitDate;
+                var arrivalDate = tjq('#arrivalDate').val().split("/");
+                var arrival = arrivalDate[2] + "-" + arrivalDate[0] + "-" + arrivalDate[1]
+                var departureDate = tjq('#departureDate').val().split("/");
+                var departure = departureDate[2] + "-" + departureDate[0] + "-" + departureDate[1]
+                if (arrival <= currentDate)
+                {
+                    e.preventDefault();
+                    tjq(".alert-error").show();
+                    tjq("#TextAlert").html("{{ 'accueil.message.error2'|trans }}");
+                }
+                else if (arrival >= departure)
+                {
+                    e.preventDefault();
+                    tjq(".alert-error").show();
+                    tjq("#TextAlert").html("{{ 'accueil.message.error1'|trans }}");
+                }
+                else
+                    return true;
+                                })
+                            })
+    </script>
+{% endblock %}

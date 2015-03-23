@@ -1,0 +1,125 @@
+topnav:
+    message: Welcome
+    
+menu:
+    home: Accueil
+    contact: Contact  
+    
+contact:
+    address: Address
+    phone: Phone
+    sendUsMessage: Send us a Message
+    yourName: Your Name
+    yourEmail: Your Email
+    yourMessage: Your Message
+    writeMessaHere: write message here
+    sendMessage: SEND MESSAGE
+    
+    
+accueil:     
+    accueil : Home page
+    where : Where
+    when : When
+    checkin : Check in
+    checkout : Check out
+    who : Who
+    rooms : Rooms
+    adults : Adults
+    kids : Kids
+    yourdestination : Your Destination
+    enter_a_destination : Enter a destination or hotel name
+    searchnow : SEARCH NOW
+    currency : Currency
+    select_your_currency : Select your currency
+    searchagain : SEARCH AGAIN
+    message:
+        error1: The date of CHECK OUT must be higher than date of CHECK IN
+        error2: The date of CHECK IN must be higher than current date at the time
+    partenaire: Partners    
+hotellist:
+    hotelsearch: HOTEL SEARCH RESULTS
+    resultsfound: Results in this page
+    activePropertyCount: Active Property Count
+    reviews: Reviews
+    avg: AVG/NIGHT
+    map: VIEW MAP
+    select: SELECT
+    sort:
+        sort: Sort results by
+        nosort: No Sort
+        price: Price
+        alpha: Alphabetically
+        promo: Promo
+    filtre:
+        modifysearch: Modify Search
+        hotelname: Hotel Name
+        rate: Rate
+        starrating: Stars rating
+        min: Min
+        max: Max
+    page: 
+        first: First
+        previous: Previous
+        next: Next
+        last: Last
+
+hotel:
+    description: Description
+    availability: Availability
+    amenities: Amenities
+    total: Total
+    desc:
+        hotelname: Hotel name
+        hoteltype: Hotel type
+        star: star
+        city: City
+        hotelcountry: Hotel country
+        hotelAddress: Hotel address
+        numberOfRooms: Number of rooms
+        numberOfFloors: Number of floors
+        checkInTime: Check In Time
+        checkOutTime: Check Out Time
+        propertyInformation: Information
+        areaInformation: Area Information
+        propertyDescription: Property Description
+        hotelPolicy: Hotel Policy
+        roomInformation: Room information
+        checkInInstructions: Check in instructions
+        knowBeforeYouGoDescription: Know Before You Go Description
+        mandatoryFeesDescription: mandatory Fees Description
+        locationDescription: Location Description
+        diningDescription: Dining Description
+        amenitiesDescription: Amenities Description
+        businessAmenitiesDescription: Business Amenities Description
+        roomDetailDescription: Room Detail Description
+    AvailableRooms: Available Rooms    
+    room:
+        rateOccupancyPerRoom: rate Occupancy Per Room
+        persons: Persons
+        booknow: BOOK NOW
+errorpage:
+    error: Error
+    message: Page not found
+    message2: GO BACK TO HOME
+
+book:
+    booking: Booking
+    yourPersonalInformation: Your Personal Information
+    firstName: First name
+    lastName: Last name
+    homePhone: Home Phone
+    workPhone: Work Phone
+    address: Address
+    room: Room
+    bookDetails: Booking Details
+    edit: Edit
+    
+footer:
+    sitemap: Site map
+    mailingList: Mailing List
+    textMailingList: Sign up for our mailing list to get latest updates and offers.
+    about: About Wetla
+    textAbout: Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massaidp nequetiam lore elerisque.
+
+
+

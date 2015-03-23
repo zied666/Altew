@@ -1,0 +1,48 @@
+{% if room.RateInfos.RateInfo.RoomGroup.Room.rateKey is defined %}
+    {% set rateKey=room.RateInfos.RateInfo.RoomGroup.Room.rateKey %}
+{% else %}
+    {% set rateKey=room.RateInfos.RateInfo.RoomGroup.Room[1].rateKey %}
+{% endif %}    
+{% set rateCode=room.rateCode %}
+{% set roomTypeCode=room.RoomType['@roomCode'] %}
+{% set chargeableRate=room.RateInfos.RateInfo.ChargeableRateInfo['@total'] %}
+<article class="box">
+    <figure class="col-sm-4 col-md-3">
+        <a class="hover-effect popup-gallery" href="javascript:void(0)" title="">
+            {% if room.RoomImages.RoomImage.url is defined %}
+                <img width="230" height="160" src="{{ room.RoomImages.RoomImage.url }}">
+            {% else %}
+                <img width="230" height="160" src="{{ asset('images/noimage.gif') }}">
+            {% endif %}
+        </a>
+    </figure>
+    <div class="details col-xs-12 col-sm-8 col-md-9">
+        <div>
+            <div>
+                <div class="box-title">
+                    <h4 class="title" style="color: #7db921">{{ room.rateDescription }}</h4>
+                    <dl class="description">
+                        <dt>{{ 'hotel.room.rateOccupancyPerRoom'|trans }}:</dt>
+                        <dd>{{ room.rateOccupancyPerRoom }} {{ 'hotel.room.persons'|trans }}</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="price-section">
+                <span class="price" style="font-size: 18px;">
+                    <small>{{ 'hotel.total'|trans }}</small>
+                    {{ room.RateInfos.RateInfo.ChargeableRateInfo['@total'] }} {{ room.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode'] }}
+                </span>
+            </div>
+        </div>
+        <div>
+            <p>{{ room.RoomType.descriptionLong|replace({'<br /><br />': '<br />'})|raw }}</p>
+            <div class="action-section">
+{#                {% if country=="Tunisia" or country=="" %}#}
+                    <a href="{{ path('currency',{'idhotel':idhotel,'stars':stars,'currency':currency,'arrivalDate':arrivalDate2,'departureDate':departureDate2,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'rateKey':rateKey,'roomTypeCode':roomTypeCode,'rateCode':rateCode,'chargeableRate':chargeableRate}) }}" class="button btn-small dark-blue1 full-width text-center">{{ 'hotel.room.booknow'|trans }}</a>
+{#                {% else %}    #}
+{#                    <a href="javascript:void(0)" data-href="{{ room.deepLink|replace({'55505':'347646',';':'&'}) }}" class="button btn-small dark-blue1 full-width text-center TravelNowBook ">Travel Now</a>#}
+{#                {% endif %}#}
+            </div>
+        </div>
+    </div>
+</article>

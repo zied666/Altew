@@ -1,0 +1,10 @@
+{% for k,v in app.session.getFlashBag %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert {{ k }}">
+                {{ v.0 }}
+                <span class="close"></span>
+            </div>
+        </div>
+    </div>   
+{% endfor %} 

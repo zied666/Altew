@@ -1,0 +1,108 @@
+<div class="update-search clearfix">
+    <form id="HotelForm" action="{{ path('EditHotel') }}" method="post">
+        <input type="hidden" name="idhotel" value="{{ idhotel }}" />
+        <input type="hidden" name="stars" value="{{ stars }}" />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-error" style="display: none">
+                    <p id="TextAlert"> </p>
+                    <span class="close"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-9 col-md-6">
+                <label>{{ 'accueil.select_your_currency'|trans }}</label>
+                <select class="input-text full-width" placeholder="{{ 'accueil.enter_a_destination'|trans }}" name="currencyCode" required>
+                    <optgroup label="Europe">
+                        <option value="EUR" {% if currency=='EUR' %}selected{% endif %}>EUR Euro</option>
+                        <option value="GBP" {% if currency=='GBP' %}selected{% endif %}>Britsh Pound</option>
+                        <option value="CHF" {% if currency=='CHF' %}selected{% endif %}>Swiss Franc</option>
+                    </optgroup>
+                    <optgroup label="North America">
+                        <option value="CAD" {% if currency=='CAD' %}selected{% endif %}>Canadian Dollar</option>
+                        <option value="USD" {% if currency=='USD' %}selected{% endif %}>US Dollar</option>
+                    </optgroup>
+                    <optgroup label="Asia">
+                        <option value="JPY" {% if currency=='JPY' %}selected{% endif %}>Japanese Yen</option>
+                        <option value="CNY" {% if currency=='CNY' %}selected{% endif %}>Chinese Yuan Renminbi</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="form-group col-sm-6 col-md-4">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>{{ 'accueil.checkin'|trans }}</label>
+                        <div class="datepicker-wrap">
+                            <input type="text" class="input-text full-width" value="{{ arrivalDate }}" id="arrivalDate" name="arrivalDate" required />
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <label>{{ 'accueil.checkout'|trans }}</label>
+                        <div class="datepicker-wrap">
+                            <input type="text" class="input-text full-width" value="{{ departureDate }}" id="departureDate" name="departureDate" required  />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-sm-6 col-md-2 fixheight">
+                <label class="hidden-xs">&nbsp;</label>
+                <button type="submit" class="full-width icon-check animated" data-animation-type="bounce" data-animation-duration="1">{{ 'accueil.searchnow'|trans }}</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                {% for room in rooms if room!=0 %}
+                    {% set numRoom=loop.index %}
+                    <div class="row mrg-t-15">
+                        <div class="col-md-2">
+                            {% if numRoom==1 %}
+                                <label>{{ 'accueil.rooms'|trans }}</label>
+                                <div class="selector">
+                                    <select class="full-width" name="rooms" id="rooms">
+                                        {% for i in 1..5 %}
+                                            <option value="{{ i }}" {% if i==rooms|length %}selected{% endif %}>0{{ i }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-1">
+                            <label>{{ 'accueil.adults'|trans }}</label>
+                            <div class="selector">
+                                <select class="full-width" name="adulteRoom{{ numRoom }}">
+                                    {% for i in 1..5 %}
+                                        <option value="{{ i }}" {% if i==room.adulte %}selected{% endif %}>0{{ i }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <label>{{ 'accueil.kids'|trans }}</label>
+                            <div class="selector">
+                                <select class="full-width Kids" name="enfantRoom{{ numRoom }}" data-chambre="{{ numRoom }}">
+                                    <option value="0">0</option>
+                                    {% for i in 1..5 %}
+                                        <option value="{{ i }}" {% if i==room.enfants|length %}selected{% endif %}>0{{ i }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1 AgeSeparator"></div>
+                        {% for enfant in room.enfants %}
+                            <div class="col-md-1">
+                                <label>Age {{ loop.index }}</label>
+                                <div class="selector">
+                                    <select class="full-width" name="chambre{{ numRoom }}age{{ loop.index }}" required >
+                                        <option value="">--</option>
+                                        {% for age in 1..17 %}
+                                            <option value="{{ age }}" {% if age==enfant  %}selected{% endif %} >{{ age }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,50 @@
+<div class="main-header">
+    <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+        Mobile Menu Toggle
+    </a>
+    <div class="container" id="Menu-Container">
+        <h1 class="logo navbar-brand">
+            <a href="{{ path('front_global_homepage') }}">
+                <img src="{{ asset('images/logo.png') }}"  />
+            </a>
+        </h1>
+        <nav id="main-menu" role="navigation">
+            <ul class="menu">
+                <li class="menu-item-has-children {% if app.request.get('_route')=='front_global_homepage' %}active{% endif %}">
+                    <a href="{{ path('front_global_homepage') }}">{{ 'menu.home'|trans }}</a>
+                </li>
+                <li class="menu-item-has-children {% if app.request.get('_route')=='contact' %}active{% endif %}">
+                    <a href="{{ path('contact') }}">{{ 'menu.contact'|trans }}</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <nav id="mobile-menu-01" class="mobile-menu collapse">
+        <ul id="mobile-primary-menu" class="menu">
+            <li class="menu-item-has-children {% if app.request.get('_route')=='front_global_homepage' %}active{% endif %}">
+                <a href="{{ path('front_global_homepage') }}">{{ 'menu.home'|trans }}</a>
+            </li>
+            <li class="menu-item-has-children {% if app.request.get('_route')=='contact' %}active{% endif %}">
+                <a href="{{ path('contact') }}">{{ 'menu.contact'|trans }}</a>
+            </li>
+        </ul>
+
+        <ul class="mobile-topnav container">
+            <li class="ribbon language menu-color-skin">
+                <a href="#" data-toggle="collapse">
+                    {% if app.request.getLocale()=='fr' %}
+                        Français
+                    {% elseif app.request.getLocale()=='en' %}
+                        English
+                    {% endif %}
+                </a>
+                <ul class="menu mini">
+                    <li {% if app.request.getLocale()=='en' %}class="active"{% endif %}><a href="{{ path('front_global_homepage',{'_locale':'en'}) }}">English</a></li>
+                    <li {% if app.request.getLocale()=='fr' %}class="active"{% endif %}><a href="{{ path('front_global_homepage',{'_locale':'fr'}) }}">Français</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </nav>
+</div>

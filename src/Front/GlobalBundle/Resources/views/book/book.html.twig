@@ -1,0 +1,97 @@
+{% extends "::base.html.twig" %}
+{% block title %}{{ 'book.booking'|trans }}{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div id="main" class="col-sms-6 col-sm-8 col-md-9">
+                <div class="booking-section travelo-box">
+                    <form action="{{ path('validation',{'idhotel':idhotel,'stars':stars,'currency':currency,'arrivalDate':arrivalDate2,'departureDate':departureDate2,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'rateKey':rateKey,'roomTypeCode':roomTypeCode,'rateCode':rateCode,'chargeableRate':chargeableRate}) }}" method="POST" class="booking-form">
+                        <div class="person-information">
+                            <h2>{{ 'book.yourPersonalInformation'|trans }}</h2>
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-md-5">
+                                    <label>{{ 'book.firstName'|trans }}</label>
+                                    <input type="text" class="input-text full-width" name="firstName" required />
+                                </div>
+                                <div class="col-sm-6 col-md-5">
+                                    <label>{{ 'book.lastName'|trans }}</label>
+                                    <input type="text" class="input-text full-width" name="lastName" required/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-md-5">
+                                    <label>{{ 'book.homePhone'|trans }}</label>
+                                    <input type="text" class="input-text full-width" name="homePhone" required />
+                                </div>
+                                <div class="col-sm-6 col-md-5">
+                                    <label>{{ 'book.workPhone'|trans }}</label>
+                                    <input type="text" class="input-text full-width" name="workPhone"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-md-5">
+                                    <label>{{ 'book.address'|trans }}</label>
+                                    <input type="text" class="input-text full-width" name="address" required />
+                                </div>
+                                <div class="col-sm-6 col-md-5">
+                                    <label>Email</label>
+                                    <input type="email" class="input-text full-width" name="email" required />
+                                </div>
+                            </div>
+                        </div>
+                        {% for room in rooms %}
+                            <hr />
+                            <div class="card-information">
+                                <h2>{{ 'book.room'|trans }} {{ loop.index }} [{{ 'accueil.adults'|trans~' : '~room.adulte~', '~'accueil.kids'|trans~' : '~room.enfants|length }}]</h2>
+                                <div class="form-group row">
+                                    <div class="col-sm-4 col-md-4">
+                                        <label>{{ 'book.firstName'|trans }}</label>
+                                        <input type="text" class="input-text full-width" name="firstName{{ loop.index }}" required />
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <label>{{ 'book.lastName'|trans }}</label>
+                                        <input type="text" class="input-text full-width" name="lastName{{ loop.index }}" required/>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <label>{{ 'book.beddingPreference'|trans }}</label>
+                                        <div class="selector">
+                                            <select class="full-width" name="bed{{ loop.index }}">
+                                                {% if hotel.HotelRoomResponse.rateCode is defined %}
+                                                    {% if  hotel.HotelRoomResponse.BedTypes['@size']==1 %}
+                                                        <option value="{{ hotel.HotelRoomResponse.BedTypes.BedType['@id'] }}" >{{ hotel.HotelRoomResponse.BedTypes.BedType.description }}</option>
+                                                    {% else %}
+                                                        {% for bed in  hotel.HotelRoomResponse.BedTypes.BedType %}
+                                                            <option value="{{ bed['@id'] }}" >{{ bed.description }}</option>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% for room in hotel.HotelRoomResponse if room.rateCode== rateCode %}
+                                                        {% if room.BedTypes['@size']==1%}
+                                                            <option value="{{ room.BedTypes.BedType['@id'] }}" >{{ room.BedTypes.BedType.description }}</option>
+                                                        {% else %}
+                                                            {% for bed in room.BedTypes.BedType %}
+                                                                <option value="{{ bed['@id'] }}" >{{ bed.description }}</option>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <hr />
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-md-5">
+                                <button type="submit" class="full-width btn-large">{{ 'book.confirmbooking'|trans }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% include 'FrontGlobalBundle:book:details.html.twig' %}
+        </div>
+    </div>
+
+{% endblock %}

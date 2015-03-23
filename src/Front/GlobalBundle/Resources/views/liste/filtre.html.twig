@@ -1,0 +1,120 @@
+{% if list.HotelListResponse.HotelList['@activePropertyCount'] is defined %}
+    <div class="icon-box style3 counters-box">
+        <div class="numbers">
+            <i class="soap-icon-hotel red-color"></i>
+            <span class="display-counter" data-value="{{ list.HotelListResponse.HotelList['@activePropertyCount'] }}">0</span>
+        </div>
+        <div class="description">{{ 'hotellist.activePropertyCount'|trans }}</div>
+    </div>
+    <div class="icon-box style3 counters-box">
+        <div class="numbers">
+            <i class="soap-icon-hotel-1 hotel-color"></i>
+            <span class="display-counter" data-value="{{ list.HotelListResponse.HotelList['@size'] }}">0</span>
+        </div>
+        <div class="description">{{ 'hotellist.resultsfound'|trans }}</div>
+    </div>
+{% endif %}
+<div class="toggle-container filters-container">
+    <div class="panel style1 arrow-right">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" href="#rating-filter" class="collapsed">{{ 'hotellist.filtre.pricestars' | trans }}</a>
+        </h4>
+        <div id="rating-filter" class="panel-collapse collapse {% if rate!='-' or stars !='-' %}in{% endif %} filters-container">
+            <div class="panel-content">
+                <form method="post"  action="{{ path('filtrehotels',{'currency':currency,'destination':destination,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'page':page,'sort':'NOSORT','search':search,'stars':stars,'rate':rate,}) }}">
+                    <div class="row">
+                        <label>{{ 'hotellist.filtre.prix'|trans }}</label>
+                        <div class="form-group col-md-6">
+                            <label>{{ 'hotellist.filtre.min'|trans }}</label>
+                            <div>
+                                <input type="number" class="input-text full-width" min="0"  name="RateMin" value="{{ MinRate }}" />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{ 'hotellist.filtre.max'|trans }}</label>
+                            <div>
+                                <input type="number" class="input-text full-width" min="0"  name="RateMax" value="{{ MaxRate }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>{{ 'hotellist.filtre.starrating'|trans }}</label>
+                        <div class="form-group col-md-6">
+                            <label>{{ 'hotellist.filtre.min'|trans }}</label>
+                            <select class="input-text full-width"  name="StarMin">
+                                <option value=""></option>
+                                {% for i in 1..5 %}
+                                    <option value="{{ i }}" {% if MinStars==i %}selected{% endif %}>{{ i }}</option>
+                                {% endfor  %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{ 'hotellist.filtre.max'|trans }}</label>
+                            <select class="input-text full-width"  name="StarMax">
+                                <option value=""></option>
+                                {% for i in 1..5 %}
+                                    <option value="{{ i }}" {% if MaxStars==i %}selected{% endif %}>{{ i }}</option>
+                                {% endfor  %}
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <button class="btn-medium icon-check uppercase full-width">{{ 'accueil.searchagain' | trans }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel style1 arrow-right">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" href="#modify-search-panel">{{ 'hotellist.filtre.modifysearch'|trans }}</a>
+        </h4>
+        <div id="modify-search-panel" class="panel-collapse collapse in">
+            <div class="panel-content">
+                <form method="post"  action="{{ path('filtrehotels',{'currency':currency,'destination':destination,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'page':page,'sort':'NOSORT','search':search,'stars':stars,'rate':rate,}) }}">
+                    <div class="form-group">
+                        <label>{{ 'hotellist.filtre.hotelname'|trans }}</label>
+                        <div>
+                            <input type="text" class="input-text full-width" name="NameHotel" value="{% if search!='_' %}{{ search }}{% endif %}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ 'accueil.select_your_currency'|trans }}</label>
+                        <select class="input-text full-width" placeholder="{{ 'accueil.enter_a_destination'|trans }}" name="CurrencyCode" required>
+                            <optgroup label="Europe">
+                                <option value="EUR"{% if currency =='EUR' %}selected{% endif %}>EUR Euro</option>
+                                <option value="GBP"{% if currency =='GBP' %}selected{% endif %}>Britsh Pound</option>
+                                <option value="CHF"{% if currency =='CHF' %}selected{% endif %}>Swiss Franc</option>
+                            </optgroup>
+                            <optgroup label="North America">
+                                <option value="CAD"{% if currency =='CAD' %}selected{% endif %}>Canadian Dollar</option>
+                                <option value="USD"{% if currency =='USD' %}selected{% endif %}>US Dollar</option>
+                            </optgroup>
+                            <optgroup label="Asia">
+                                <option value="JPY"{% if currency =='JPY' %}selected{% endif %}>Japanese Yen</option>
+                                <option value="CNY"{% if currency =='CNY' %}selected{% endif %}>Chinese Yuan Renminbi</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ 'accueil.yourdestination'|trans }}</label>
+                        <input type="text" class="input-text full-width" name="Destination" required value="{{ destination }}" />
+                    </div>
+                    <div class="form-group">
+                        <label>{{ 'accueil.checkin'|trans }}</label>
+                        <div class="datepicker-wrap">
+                            <input type="text" class="input-text full-width" name="ArrivalDate" required  value="{{ arrivalDateFR }}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ 'accueil.checkout'|trans }}</label>
+                        <div class="datepicker-wrap">
+                            <input type="text" class="input-text full-width" name="DepartureDate" required  value="{{ departureDateFR }}" />
+                        </div>
+                    </div>
+                    <br />
+                    <button class="btn-medium icon-check uppercase full-width">{{ 'accueil.searchagain' | trans }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

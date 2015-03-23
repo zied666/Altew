@@ -1,0 +1,34 @@
+<div class="sidebar col-md-3">
+    <article class="detailed-logo" id="hotel-siderbar">
+        <figure style="padding: 0px;">
+            {% for image in hotel.HotelImages.HotelImage if image.type==1 %}
+                <img width="{{ image.width }}" height="{{ image.height }}" src="{{ image.url }}">
+            {% endfor %}
+        </figure>
+        <div class="details">
+            <h2 class="box-title">
+                {{ hotel.hotelName }}
+                <small>
+                    <i class="soap-icon-departure yellow-color"></i>
+                    <span class="fourty-space"><strong>{{ hotel.hotelCity }}</strong>, {{ hotel.hotelAddress }}</span>
+                </small>
+            </h2>
+            <div class="feedback clearfix">
+                <div class="five-stars-container" data-toggle="tooltip" data-placement="bottom"><span class="five-stars" style="width: {{Stars}}%;"></span></div>
+                    {% if hotel.tripAdvisorReviewCount is defined %}
+                    <span class="review pull-right">{{ hotel.tripAdvisorReviewCount }} {{ 'hotellist.reviews'|trans }}</span>
+                {% endif %}
+            </div>
+        </div>
+        {% if  hotel.tripAdvisorRating is defined %}
+            <div class="intro table-wrapper full-width hidden-table-sms">
+                <div class="rating table-cell col-sm-12">
+                    <span class="score counters-box numbers" style="text-align: center;">
+                        <span class="display-counter" data-value="{{ hotel.tripAdvisorRating*2 }}">0</span>
+                        /10
+                    </span>
+                </div>
+            </div>
+        {% endif %}
+    </article>
+</div>

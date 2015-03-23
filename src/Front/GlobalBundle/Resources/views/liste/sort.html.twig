@@ -1,0 +1,30 @@
+<div class="sort-by-section clearfix">
+    <h4 class="sort-by-title block-sm">{{ 'hotellist.sort.sort'|trans }}:</h4>
+    <ul class="sort-bar clearfix block-sm">
+        
+        <li class="sort-by-name {% if sort=='NOSORT' %}active{% endif %}">
+            <a class="sort-by-container" href="{{ path('listehotels',{'currency':currency,'destination':destination,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'page':page,'sort':'NOSORT','search':search,'stars':stars,'rate':rate,}) }}">
+                <span>{{ 'hotellist.sort.nosort'|trans }}</span>
+            </a>
+        </li>
+        
+        <li class="sort-by-price {% if sort=='PRICE_AVERAGE' %}active{% endif %}">
+            <a class="sort-by-container" href="{{ path('listehotels',{'currency':currency,'destination':destination,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'page':page,'sort':'PRICE_AVERAGE','search':search,'stars':stars,'rate':rate,}) }}">
+                <span>{{ 'hotellist.sort.price'|trans }}</span>
+            </a>
+        </li>
+        {% if false %}
+        <li class="sort-by-popularity {% if sort=='PROMO' %}active{% endif %}">
+            <a class="sort-by-container" href="{{ path('listehotels',{'currency':currency,'destination':destination,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'page':page,'sort':'PROMO','search':search,'stars':stars,'rate':rate,}) }}">
+                <span>{{ 'hotellist.sort.promo'|trans }}</span>
+            </a>
+        </li>
+        {% endif %}
+        <li class="sort-by-popularity {% if sort=='ALPHA' %}active{% endif %}">
+            <a class="sort-by-container" href="{{ path('listehotels',{'currency':currency,'destination':destination,'arrivalDate':arrivalDate,'departureDate':departureDate,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'page':page,'sort':'ALPHA','search':search,'stars':stars,'rate':rate,}) }}">
+                <span>{{ 'hotellist.sort.alpha'|trans }}</span>
+            </a>
+        </li>
+        
+    </ul>
+</div>

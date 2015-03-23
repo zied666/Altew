@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->  <html> <!--<![endif]-->
+    <head>
+        <!-- Page Title -->
+        <title>{% block title %}Wetla{% endblock %}</title>
+        <!-- Meta Tags -->
+        <meta charset="utf-8">
+        <meta name="keywords" content="HTML5 Template" />
+        <meta name="description" content="Wetla">
+        <meta name="author" content="NetMarketing">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% block stylesheets %}
+            <!-- Theme Styles -->
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+            <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+            <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}">
+
+            <!-- Current Page Styles -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('components/revolution_slider/css/settings.css') }}" media="screen" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('components/revolution_slider/css/style.css') }}" media="screen" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('components/jquery.bxslider/jquery.bxslider.css') }}" media="screen" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('components/flexslider/flexslider.css') }}" media="screen" />
+
+            <!-- Main Style -->
+            <link id="main-style" rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+            <!-- Custom Styles -->
+            <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+            <!-- Updated Styles -->
+            <link rel="stylesheet" href="{{ asset('css/updates.css') }}">
+
+            <!-- Responsive Styles -->
+            <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+
+            <!-- helpers_zied -->
+            <link rel="stylesheet" href="{{ asset('css/helpers_zied.css') }}">
+
+            <!-- CSS for IE -->
+            <!--[if lte IE 9]>
+                <link rel="stylesheet" type="text/css" href="{{ asset('css/ie.css') }}" />
+            <![endif]-->
+        {% endblock %}
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js') }}"></script>
+          <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js') }}"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+        <div id="page-wrapper">
+            <header id="header" class="navbar-static-top">
+                {% include '::topnav.html.twig' %}
+                {% include '::menu.html.twig' %}
+            </header>
+            {% block topbody %}
+                <div class="page-title-container">
+                    <div class="container">
+                        <div class="page-title pull-left">
+                            <h2 class="entry-title">{{ block('title') }}</h2>
+                        </div>
+                        <ul class="breadcrumbs pull-right">
+                            <li><a href="{{ path('front_global_homepage') }}">{{ 'menu.home' | trans }}</a></li>
+                            <li class="active">{{ block('title') }}</li>
+                        </ul>
+                    </div>
+                </div>
+            {% endblock %}
+            <section id="content">
+                {#                {% include '::alert.html.twig' %}#}
+            {% block body %}{% endblock %}
+        </section>
+        {% include '::footer.html.twig' %}
+    </div>
+
+    {% block javascripts %}
+        <!-- Javascript -->
+        <script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.noconflict.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/modernizr.2.7.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.placeholder.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery-ui.1.10.4.min.js') }}"></script>
+
+        <!-- Twitter Bootstrap -->
+        <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+
+        <!-- load revolution slider scripts -->
+        <script type="text/javascript" src="{{ asset('components/revolution_slider/js/jquery.themepunch.plugins.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('components/revolution_slider/js/jquery.themepunch.revolution.min.js') }}"></script>
+
+        <!-- Google Map Api -->
+        <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+        <script type='text/javascript' src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
+        <script type="text/javascript" src="{{ asset('js/gmap3.min.js') }}"></script>
+
+        <!-- load BXSlider scripts -->
+        <script type="text/javascript" src="{{ asset('components/jquery.bxslider/jquery.bxslider.min.js') }}"></script>
+
+        <!-- load FlexSlider scripts -->
+        <script type="text/javascript" src="{{ asset('components/flexslider/jquery.flexslider-min.js') }}"></script>
+
+        <!-- parallax -->
+        <script type="text/javascript" src="{{ asset('js/jquery.stellar.min.js') }}"></script>
+
+        <!-- waypoint -->
+        <script type="text/javascript" src="{{ asset('js/waypoints.min.js') }}"></script>
+
+        <!-- load page Javascript -->
+        <script type="text/javascript" src="{{ asset('js/theme-scripts.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
+
+        <script type="text/javascript">
+            tjq(document).ready(function () {
+                tjq("#price-range").slider({
+                    range: true,
+                    min: 0,
+                    max: 1000,
+                    values: [100, 800],
+                    slide: function (event, ui) {
+                        tjq(".min-price-label").html("$" + ui.values[ 0 ]);
+                        tjq(".max-price-label").html("$" + ui.values[ 1 ]);
+                    }
+                });
+                tjq(".min-price-label").html("$" + tjq("#price-range").slider("values", 0));
+                tjq(".max-price-label").html("$" + tjq("#price-range").slider("values", 1));
+            });
+            tjq(document).ready(function () {
+                tjq('.revolution-slider').revolution(
+                        {
+                            dottedOverlay: "none",
+                            delay: 9000,
+                            startwidth: 1200,
+                            startheight: 646,
+                            onHoverStop: "on",
+                            hideThumbs: 10,
+                            fullWidth: "on",
+                            forceFullWidth: "on",
+                            navigationType: "none",
+                            shadow: 0,
+                            spinner: "spinner4",
+                            hideTimerBar: "on",
+                        });
+            });
+        </script>
+    {% endblock %}
+</body>
+</html>
+

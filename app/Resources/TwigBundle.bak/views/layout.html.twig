@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->  <html> <!--<![endif]-->
+<head>
+    <!-- Page Title -->
+    <title>{{ 'errorpage.error'|trans }}</title>
+    
+    <!-- Meta Tags -->
+    <meta charset="utf-8">    
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}">
+    
+    <!-- Main Style -->
+    <link id="main-style" rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+    <!-- Updated Styles -->
+    <link rel="stylesheet" href="{{ asset('css/updates.css') }}">
+    
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    
+    <!-- CSS for IE -->
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/ie.css') }}" />
+    <![endif]-->
+    
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js') }}"></script>
+      <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js') }}"></script>
+    <![endif]-->
+</head>
+<body class="post-404page style2 body-blank">
+    <div id="page-wrapper" class="wrapper-blank">
+        <section id="content">
+            <div class="container">
+                <div id="main">
+                    <h1 class="logo">
+                        <a href="{{ path('front_global_homepage') }}">
+                            <img src="{{ asset('images/logo2.png') }}" alt="Travelo HTML5 Template" />
+                        </a>
+                    </h1>
+                            <div class="error-message"><strong>{{ 'errorpage.error'|trans }} 404:</strong> {{ 'errorpage.message'|trans }}</div>
+                    <div class="error-message-404">
+                        <img src="{{ asset('images/404-style1.png') }}" alt="">
+                    </div>
+                    <a href="{{ path('front_global_homepage') }}" class="button go-back"><i class="soap-icon-longarrow-left circle"></i>{{ 'errorpage.message2'|trans }}</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.noconflict.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/modernizr.2.7.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.placeholder.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-ui.1.10.4.min.js') }}"></script>
+    
+    <!-- Twitter Bootstrap -->
+    <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+    
+    <!-- parallax -->
+    <script type="text/javascript" src="{{ asset('js/jquery.stellar.min.js') }}"></script>
+    
+    <!-- waypoint -->
+    <script type="text/javascript" src="{{ asset('js/waypoints.min.js') }}"></script>
+
+    <!-- load page Javascript -->
+    <script type="text/javascript" src="{{ asset('js/theme-scripts.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
+    
+</body>
+</html>
+

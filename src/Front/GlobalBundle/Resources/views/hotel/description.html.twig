@@ -1,0 +1,174 @@
+<div class="tab-pane fade" id="hotel-description">
+    <div class="intro table-wrapper full-width hidden-table-sms">
+        <div class="col-sm-6 col-lg-6 table-cell features">
+            <ul>
+                <li><label>{{ 'hotel.desc.hotelname'|trans }}:</label>{{ hotel.hotelName }}</li>
+                <li><label>{{ 'hotel.desc.hoteltype'|trans }}:</label>{{ stars }} {{ 'hotel.desc.star'|trans }}</li>
+                <li><label>{{ 'hotel.desc.hotelcountry'|trans }}:</label>{{ hotel.hotelCountry }}</li>
+                <li><label>{{ 'hotel.desc.city'|trans }}:</label>{{ hotel.hotelCity }}</li>
+                <li><label>{{ 'hotel.desc.hotelAddress'|trans }}:</label>{{ hotel.hotelAddress }}</li>
+            </ul>
+        </div>
+        <div class="col-sm-6 col-lg-6 features table-cell">
+            <ul>
+                <li><label>{{ 'hotel.desc.numberOfRooms'|trans }}:</label>{{ hotel.HotelDetails.numberOfRooms }}</li>
+                <li><label>{{ 'hotel.desc.numberOfFloors'|trans }}:</label>{{ hotel.HotelDetails.numberOfFloors }}</li>
+                    {% if hotel.HotelDetails.checkInTime is defined %}
+                    <li><label>{{ 'hotel.desc.checkInTime'|trans }}:</label>{{ hotel.HotelDetails.checkInTime }}</li>
+                    {% endif %}
+                    {% if hotel.HotelDetails.checkOutTime is defined %}
+                    <li><label>{{ 'hotel.desc.checkOutTime'|trans }}:</label>{{ hotel.HotelDetails.checkOutTime }}</li>
+                    {% endif %}
+                    {% if hotel.HotelDetails.propertyInformation is defined %}
+                    <li><label>{{ 'hotel.desc.propertyInformation'|trans }}:</label>{{ hotel.HotelDetails.propertyInformation }}</li>
+                    {% endif %}
+            </ul>
+        </div>
+    </div>
+    <div class="toggle-container">
+        {% if hotel.HotelDetails.areaInformation is defined %}
+            <div class="panel style1 arrow-right">
+                <h4 class="panel-title">
+                    <a class="collapsed" href="#question1" data-toggle="collapse">{{ 'hotel.desc.areaInformation'|trans }}</a>
+                </h4>
+                <div class="panel-collapse collapse" id="question1">
+                    <div class="panel-content">
+                        {{ hotel.HotelDetails.areaInformation|raw }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if hotel.HotelDetails.propertyDescription is defined %}
+        <div class="panel style1 arrow-right">
+            <h4 class="panel-title">
+                <a class="collapsed" href="#question2" data-toggle="collapse">{{ 'hotel.desc.propertyDescription'|trans }}</a>
+            </h4>
+            <div class="panel-collapse collapse" id="question2">
+                <div class="panel-content">
+                    {{ hotel.HotelDetails.propertyDescription|raw }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if hotel.HotelDetails.hotelPolicy is defined %}
+        <div class="panel style1 arrow-right">
+            <h4 class="panel-title">
+                <a class="collapsed" href="#question3" data-toggle="collapse">{{ 'hotel.desc.hotelPolicy'|trans }}</a>
+            </h4>
+            <div class="panel-collapse collapse" id="question3">
+                <div class="panel-content">
+                    {{ hotel.HotelDetails.hotelPolicy|raw }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if hotel.HotelDetails.roomInformation is defined %}
+        <div class="panel style1 arrow-right">
+            <h4 class="panel-title">
+                <a class="collapsed" href="#question4" data-toggle="collapse">{{ 'hotel.desc.roomInformation'|trans }}</a>
+            </h4>
+            <div class="panel-collapse collapse" id="question4">
+                <div class="panel-content">
+                    {{ hotel.HotelDetails.roomInformation |raw }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if hotel.HotelDetails.checkInInstructions is defined %}
+        <div class="panel style1 arrow-right">
+            <h4 class="panel-title">
+                <a class="collapsed" href="#question5" data-toggle="collapse">{{ 'hotel.desc.checkInInstructions'|trans }}</a>
+            </h4>
+            <div class="panel-collapse collapse" id="question5">
+                <div class="panel-content">
+                    {{ hotel.HotelDetails.checkInInstructions |raw }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if hotel.HotelDetails.knowBeforeYouGoDescription is defined %}
+        <div class="panel style1 arrow-right">
+            <h4 class="panel-title">
+                <a class="collapsed" href="#question6" data-toggle="collapse">{{ 'hotel.desc.knowBeforeYouGoDescription'|trans }}</a>
+            </h4>
+            <div class="panel-collapse collapse" id="question6">
+                <div class="panel-content">
+                    {{ hotel.HotelDetails.knowBeforeYouGoDescription |raw }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if hotel.HotelDetails.mandatoryFeesDescription is defined %}
+        <div class="panel style1 arrow-right">
+            <h4 class="panel-title">
+                <a class="collapsed" href="#question7" data-toggle="collapse">{{ 'hotel.desc.mandatoryFeesDescription'|trans }}</a>
+            </h4>
+            <div class="panel-collapse collapse" id="question7">
+                <div class="panel-content">
+                    {{ hotel.HotelDetails.mandatoryFeesDescription |raw }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if hotel.HotelDetails.locationDescription is defined %}
+        <div class="panel style1 arrow-right">
+            <h4 class="panel-title">
+                <a class="collapsed" href="#question8" data-toggle="collapse">{{ 'hotel.desc.locationDescription'|trans }}</a>
+            </h4>
+            <div class="panel-collapse collapse" id="question8">
+                <div class="panel-content">
+                    {{ hotel.HotelDetails.locationDescription |raw }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if hotel.HotelDetails.diningDescription is defined %}
+        <div class="panel style1 arrow-right">
+            <h4 class="panel-title">
+                <a class="collapsed" href="#question9" data-toggle="collapse">{{ 'hotel.desc.diningDescription'|trans }}</a>
+            </h4>
+            <div class="panel-collapse collapse" id="question9">
+                <div class="panel-content">
+                    {{ hotel.HotelDetails.diningDescription |raw }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if hotel.HotelDetails.amenitiesDescription is defined %}
+        <div class="panel style1 arrow-right">
+            <h4 class="panel-title">
+                <a class="collapsed" href="#question10" data-toggle="collapse">{{ 'hotel.desc.amenitiesDescription'|trans }}</a>
+            </h4>
+            <div class="panel-collapse collapse" id="question10">
+                <div class="panel-content">
+                    {{ hotel.HotelDetails.amenitiesDescription |raw }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if hotel.HotelDetails.businessAmenitiesDescription is defined %}
+        <div class="panel style1 arrow-right">
+            <h4 class="panel-title">
+                <a class="collapsed" href="#question11" data-toggle="collapse">{{ 'hotel.desc.businessAmenitiesDescription'|trans }}</a>
+            </h4>
+            <div class="panel-collapse collapse" id="question11">
+                <div class="panel-content">
+                    {{ hotel.HotelDetails.businessAmenitiesDescription |raw }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if hotel.HotelDetails.roomDetailDescription is defined %}
+        <div class="panel style1 arrow-right">
+            <h4 class="panel-title">
+                <a class="collapsed" href="#question12" data-toggle="collapse">{{ 'hotel.desc.roomDetailDescription'|trans }}</a>
+            </h4>
+            <div class="panel-collapse collapse" id="question12">
+                <div class="panel-content">
+                    {{ hotel.HotelDetails.roomDetailDescription |raw }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,3 @@
+AccueilRedirect:
+    path:     /
+    defaults: { _controller: FrontGlobalBundle:Default:Redirect }

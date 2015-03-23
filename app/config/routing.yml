@@ -1,0 +1,19 @@
+accueil:
+    resource: "@FrontGlobalBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/
+    requirements:
+        _locale: en|fr|de
+
+accueilRedirect:
+    resource: "@FrontGlobalBundle/Resources/config/routingRedirect.yml"
+    prefix:   /
+
+notification:
+    path:     /notification
+    defaults: { _controller: FrontGlobalBundle:Paiement:notification }
+succes:
+    path:     /succes
+    defaults: { _controller: FrontGlobalBundle:Paiement:succes }
+echec:
+    path:     /echec
+    defaults: { _controller: FrontGlobalBundle:Paiement:echec }
