@@ -120,6 +120,9 @@ book:
     taxes: (including taxes and fees)
     beddingPreference: Bedding Preference
     confirmbooking: CONFIRM BOOKING
+    country: Country
+    city: City
+    postalCode: Postal Code
     
 currency:
     title: Your currency

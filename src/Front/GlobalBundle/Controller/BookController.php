@@ -85,6 +85,9 @@ class BookController extends Controller
             $reservation->setWorkPhone($request->get("workPhone"));
             $reservation->setAddress($request->get("address"));
             $reservation->setEmail($request->get("email"));
+            $reservation->setCity($request->get("city"));
+            $reservation->setCountryCode($request->get("countryCode"));
+            $reservation->setPostalCode($request->get("postalCode"));
             $reservation->setArrivaleDate(new \DateTime($arrivalDate));
             $reservation->setDepartureDate(new \DateTime($departureDate));
             $reservation->setChargeableRate($chargeableRate);

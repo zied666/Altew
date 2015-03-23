@@ -75,7 +75,7 @@ class DetailsController extends Controller
             if(${"room".$i}!=0)
                 $url.="&room".$i."=".${"room".$i};
         }
-        //dump($url);
+        dump($url);
         return $Helper->url_get_contents($url);
     }
 

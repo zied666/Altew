@@ -70,6 +70,13 @@ class Reservation
      * @ORM\Column(name="idhotel", type="integer")
      */
     private $idhotel;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="postalCode", type="integer")
+     */
+    private $postalCode;
 
     /**
      * @var string
@@ -77,6 +84,20 @@ class Reservation
      * @ORM\Column(name="currency", type="string", length=5)
      */
     private $currency;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="countryCode", type="string", length=5)
+     */
+    private $countryCode;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=5)
+     */
+    private $city;
 
     /**
      * @var \DateTime
@@ -528,4 +549,73 @@ class Reservation
         return $this->montant;
     }
 
+
+    /**
+     * Set postalCode
+     *
+     * @param integer $postalCode
+     * @return Reservation
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postalCode
+     *
+     * @return integer 
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * Set countryCode
+     *
+     * @param string $countryCode
+     * @return Reservation
+     */
+    public function setCountryCode($countryCode)
+    {
+        $this->countryCode = $countryCode;
+
+        return $this;
+    }
+
+    /**
+     * Get countryCode
+     *
+     * @return string 
+     */
+    public function getCountryCode()
+    {
+        return $this->countryCode;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Reservation
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
 }

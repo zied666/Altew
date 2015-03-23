@@ -58,11 +58,17 @@ class Expedia
                 'creditCardIdentifier'     =>urlencode($this->creditCardIdentifier),
                 'creditCardExpirationMonth'=>urlencode($this->creditCardExpirationMonth),
                 'creditCardExpirationYear' =>urlencode($this->creditCardExpirationYear),
-                'address1'                 =>urlencode("travelnow"),
-                'city'                     =>urlencode("Bellevue"),
-                'stateProvinceCode'        =>urlencode("WA"),
-                'countryCode'              =>urlencode("US"),
-                'postalCode'               =>urlencode("98004")
+                'address1'                 =>urlencode($reservation->getAddress()),
+                
+                'city'                     =>urlencode($reservation->getCity()),
+                'stateProvinceCode'        =>urlencode($reservation->getCountryCode()),
+                'countryCode'              =>urlencode($reservation->getCountryCode()),
+                'postalCode'               =>urlencode($reservation->getPostalCode())
+//                
+//                'city'                     =>urlencode("Bellevue"),
+//                'stateProvinceCode'        =>urlencode("WA"),
+//                'countryCode'              =>urlencode("US"),
+//                'postalCode'               =>urlencode("98004")
             );
             $i=1;
             foreach($reservation->getRooms() as $room)
