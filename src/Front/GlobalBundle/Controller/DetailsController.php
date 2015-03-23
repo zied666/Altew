@@ -27,8 +27,6 @@ class DetailsController extends Controller
             return $this->redirect($this->generateUrl("front_global_homepage"));
         }
         $json=$Helper->EncodeCaracters($json);
-        //dump($session->all());
-        //dump($json);
         $rooms=$Helper->getRooms($room1, $room2, $room3, $room4, $room5);
         $country=$this->ip_info("Visitor", "Country");
         return $this->render('FrontGlobalBundle:hotel:hotel.html.twig', array(
@@ -75,7 +73,6 @@ class DetailsController extends Controller
             if(${"room".$i}!=0)
                 $url.="&room".$i."=".${"room".$i};
         }
-        dump($url);
         return $Helper->url_get_contents($url);
     }
 

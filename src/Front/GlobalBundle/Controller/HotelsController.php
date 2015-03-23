@@ -46,8 +46,6 @@ class HotelsController extends Controller
             $session->set('cacheKey_'.($page+1), $json['HotelListResponse']['cacheKey']);
             $session->set('cacheLocation_'.($page+1), $json['HotelListResponse']['cacheLocation']);
         }
-        //dump($session->all());
-        //dump($json);
         return $this->render('FrontGlobalBundle:liste:liste.html.twig', array(
                     'list'           =>$json,
                     'session'        =>$session->all(),
@@ -96,9 +94,6 @@ class HotelsController extends Controller
                 $rate=$request->get('RateMin').'-'.$request->get('RateMax');
                 $stars=$request->get('StarMin').'-'.$request->get('StarMax');
             }
-
-            //dump($stars);
-            //dump($rate);
         }
         return $this->redirect($this->generateUrl("listehotels", array(
                             'currency'     =>$currency,
@@ -207,7 +202,6 @@ class HotelsController extends Controller
             if($search!='')
                 $url .="&propertyName=".$search;
         }
-        //dump($url);
         return $Helper->url_get_contents($url);
     }
 
