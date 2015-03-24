@@ -34,4 +34,6 @@ services:
             - %creditCardIdentifier%
             - %creditCardExpirationMonth%
             - %creditCardExpirationYear%
+    devise:
+        class: Front\GlobalBundle\Services\Devise
         

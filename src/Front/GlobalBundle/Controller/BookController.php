@@ -96,6 +96,7 @@ class BookController extends Controller
             $reservation->setRateCode($rateCode);
             $reservation->setRateKey($rateKey);
             $reservation->setRoomTypeCode($roomTypeCode);
+            $reservation->setMontant($this->container->get("Devise")->convertCurrency($chargeableRate, $currency, "TND"));
             $i=1;
             foreach($rooms as $room)
             {
