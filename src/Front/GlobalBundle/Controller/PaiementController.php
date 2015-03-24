@@ -29,7 +29,6 @@ class PaiementController extends Controller
         {
             case "DETAIL":
                 $json=$this->container->get("expedia")->valider($ref);
-                var_dump($json);
                 if(isset($json['HotelRoomReservationResponse']['EanWsError']))
                     return new Response("");
                 else

@@ -147,6 +147,13 @@ class Reservation
      * @ORM\Column(name="montant", type="decimal", precision=11, scale=3,nullable=true)
      */
     private $montant;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="param", type="string", length=255, nullable=true)
+     */
+    private $param;
 
     /**
      * @ORM\OneToMany(targetEntity="Room", mappedBy="reservation")
@@ -617,5 +624,28 @@ class Reservation
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set param
+     *
+     * @param string $param
+     * @return Reservation
+     */
+    public function setParam($param)
+    {
+        $this->param = $param;
+
+        return $this;
+    }
+
+    /**
+     * Get param
+     *
+     * @return string 
+     */
+    public function getParam()
+    {
+        return $this->param;
     }
 }
