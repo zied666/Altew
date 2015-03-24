@@ -154,6 +154,13 @@ class Reservation
      * @ORM\Column(name="param", type="string", length=255, nullable=true)
      */
     private $param;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateReservation", type="datetime")
+     */
+    private $dateReservation;
 
     /**
      * @ORM\OneToMany(targetEntity="Room", mappedBy="reservation")
@@ -647,5 +654,28 @@ class Reservation
     public function getParam()
     {
         return $this->param;
+    }
+
+    /**
+     * Set dateReservation
+     *
+     * @param \DateTime $dateReservation
+     * @return Reservation
+     */
+    public function setDateReservation($dateReservation)
+    {
+        $this->dateReservation = $dateReservation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateReservation
+     *
+     * @return \DateTime 
+     */
+    public function getDateReservation()
+    {
+        return $this->dateReservation;
     }
 }
