@@ -4,6 +4,6 @@
 /app/logs/*
 /nbproject/
 /vendor/
-/app/config/parametres.yml
+/app/config/parameters.yml
 composer.phar
 composer.lock 
