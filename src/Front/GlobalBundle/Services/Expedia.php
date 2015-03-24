@@ -81,7 +81,6 @@ class Expedia
                 $i++;
             }
             $json=$this->url_post_contents($this->urlReservation, $array);
-            var_dump($json);
             return $json;
         }
     }
