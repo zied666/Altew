@@ -28,11 +28,7 @@ class PaiementController extends Controller
         switch($act)
         {
             case "DETAIL":
-                $json=$this->container->get("expedia")->valider($ref);
-                if(isset($json['HotelRoomReservationResponse']['EanWsError']))
-                    return new Response("");
-                else
-                    return new Response("Reference=".$ref."&Action=".$act."&Reponse=".$reservation->getMontant());
+                return new Response("Reference=".$ref."&Action=".$act."&Reponse=".$reservation->getMontant());
                 break;
             case "ERREUR":
                 $em->remove($reservation);
@@ -40,9 +36,16 @@ class PaiementController extends Controller
                 return new Response("Reference=".$ref."&Action=".$act."&Reponse=OK");
                 break;
             case "ACCORD":
-                $em->remove($reservation);
-                $em->flush();
-                return new Response("Reference=".$ref."&Action=".$act."&Reponse=OK");
+                $json=$this->container->get("expedia")->valider($ref);
+                if(isset($json['HotelRoomReservationResponse']['EanWsError']))
+                    return new Response("Reference=".$ref."&Action=".$act."&Reponse=");
+                else
+                {
+                    $reservation->setParam($par);
+                    $em->persist($reservation);
+                    $em->flush();
+                    return new Response("Reference=".$ref."&Action=".$act."&Reponse=OK");
+                }
                 break;
             case "REFUS":
                 $em->remove($reservation);
