@@ -1,77 +1,79 @@
 {% set Stars = (stars/5)*100 %}
 <div class="sidebar col-sms-6 col-sm-4 col-md-3">
-    <div class="booking-details travelo-box">
-        <h4>{{ 'book.bookDetails'|trans }}</h4>
-        <article class="image-box hotel listing-style1">
-            <figure class="clearfix">
-                {% for image in hotel.HotelImages.HotelImage if image.type==1 %}
-                    <a href="{{ path('detailshotel',{'idhotel':idhotel,'stars':stars,'currency':currency,'arrivalDate':arrivalDate2,'departureDate':departureDate2,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5}) }}" class="hover-effect middle-block"><img class="middle-item" width="270" height="160" alt="" src="{{ image.url }}"></a>
-                    {% endfor %}
-                <div class="travel-title">
-                    <h5 class="box-title">{{ hotel.hotelName }}<small>{{ hotel.hotelCity }}, {{ hotel.hotelCountry }}</small></h5>
-                    <a href="{{ path('detailshotel',{'idhotel':idhotel,'stars':stars,'currency':currency,'arrivalDate':arrivalDate2,'departureDate':departureDate2,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5}) }}" class="button">{{ 'book.edit'|trans }}</a>
-                </div>
-            </figure>
-            <div class="details">
-                <div class="feedback">
-                    <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="4 stars"><span style="width: {{ Stars }}%;" class="five-stars"></span></div>
-                        {% if tripAdvisorReviewCount is defined %}
-                        <span class="review">{{ hotel.tripAdvisorReviewCount }} {{ 'hotellist.reviews'|trans }}</span>
-                    {% endif %}
-                </div>
-                <div class="constant-column-3 timing clearfix">
-                    <div class="check-in">
-                        <label>{{ 'accueil.checkin'|trans }}</label>
-                        <span>{{ arrivalDate }}</span>
-                    </div>
-                    <div class="duration text-center">
-                        <i class="soap-icon-clock"></i>
-                        <span>{{ nights }} {{ 'book.nights'|trans }}</span>
-                    </div>
-                    <div class="check-out">
-                        <label>{{ 'accueil.checkout'|trans }}</label>
-                        <span>{{ departureDate }}</span>
-                    </div>
-                </div>
-                {% for room in rooms %}            
-                    <h5>{{ 'book.room'|trans }} {{ loop.index }}</h5>
-                    <dl class="other-details">
-                        <dt style="padding: 0.4em 30px;">- {{ 'accueil.adults'|trans }}</dt><dd style="padding: 0.4em 0;" class="value">{{ room.adulte }}</dd>
-                        <dt style="padding: 0.4em 30px;">- {{ 'accueil.kids'|trans }}</dt><dd style="padding: 0.4em 0;" class="value">{{ room.enfants|length }}</dd>
-                        {% for age in room.enfants %}
-                            <dt style="padding: 0.4em 80px;">- Age {{ loop.index }}</dt><dd style="padding: 0.4em 0;" class="value">{{ age }}</dd>
+    {% if hotel.HotelRoomResponse is defined %}
+        <div class="booking-details travelo-box">
+            <h4>{{ 'book.bookDetails'|trans }}</h4>
+            <article class="image-box hotel listing-style1">
+                <figure class="clearfix">
+                    {% for image in hotel.HotelImages.HotelImage if image.type==1 %}
+                        <a href="{{ path('detailshotel',{'idhotel':idhotel,'stars':stars,'currency':currency,'arrivalDate':arrivalDate2,'departureDate':departureDate2,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5}) }}" class="hover-effect middle-block"><img class="middle-item" width="270" height="160" alt="" src="{{ image.url }}"></a>
                         {% endfor %}
-                    </dl>
-                {% endfor %}
-            </div>
-        </article>
-        {% if  hotel.HotelRoomResponse.rateCode is defined  %}
-            <h4>{{ 'book.room'|trans }}: {{ hotel.HotelRoomResponse.rateDescription }}</h4>
-            <dl class="other-details">
-                <dt class="total-price">
-                {{ 'book.totalPrice'|trans }}
-                <br><small>{{ 'book.taxes'|trans }}</small>
-                </dt>
-                <dd class="total-price-value">
-                    {{ hotel.HotelRoomResponse.RateInfos.RateInfo.ChargeableRateInfo['@total'] }} {{ hotel.HotelRoomResponse.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode'] }}
-                </dd>
-            </dl>
-        {% else %}
-            {% for room in hotel.HotelRoomResponse if room.rateCode== rateCode %}
-                <h4>{{ 'book.room'|trans }}: {{ room.rateDescription }}</h4>
+                    <div class="travel-title">
+                        <h5 class="box-title">{{ hotel.hotelName }}<small>{{ hotel.hotelCity }}, {{ hotel.hotelCountry }}</small></h5>
+                        <a href="{{ path('detailshotel',{'idhotel':idhotel,'stars':stars,'currency':currency,'arrivalDate':arrivalDate2,'departureDate':departureDate2,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5}) }}" class="button">{{ 'book.edit'|trans }}</a>
+                    </div>
+                </figure>
+                <div class="details">
+                    <div class="feedback">
+                        <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="4 stars"><span style="width: {{ Stars }}%;" class="five-stars"></span></div>
+                            {% if tripAdvisorReviewCount is defined %}
+                            <span class="review">{{ hotel.tripAdvisorReviewCount }} {{ 'hotellist.reviews'|trans }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="constant-column-3 timing clearfix">
+                        <div class="check-in">
+                            <label>{{ 'accueil.checkin'|trans }}</label>
+                            <span>{{ arrivalDate }}</span>
+                        </div>
+                        <div class="duration text-center">
+                            <i class="soap-icon-clock"></i>
+                            <span>{{ nights }} {{ 'book.nights'|trans }}</span>
+                        </div>
+                        <div class="check-out">
+                            <label>{{ 'accueil.checkout'|trans }}</label>
+                            <span>{{ departureDate }}</span>
+                        </div>
+                    </div>
+                    {% for room in rooms %}            
+                        <h5>{{ 'book.room'|trans }} {{ loop.index }}</h5>
+                        <dl class="other-details">
+                            <dt style="padding: 0.4em 30px;">- {{ 'accueil.adults'|trans }}</dt><dd style="padding: 0.4em 0;" class="value">{{ room.adulte }}</dd>
+                            <dt style="padding: 0.4em 30px;">- {{ 'accueil.kids'|trans }}</dt><dd style="padding: 0.4em 0;" class="value">{{ room.enfants|length }}</dd>
+                            {% for age in room.enfants %}
+                                <dt style="padding: 0.4em 80px;">- Age {{ loop.index }}</dt><dd style="padding: 0.4em 0;" class="value">{{ age }}</dd>
+                            {% endfor %}
+                        </dl>
+                    {% endfor %}
+                </div>
+            </article>
+            {% if  hotel.HotelRoomResponse.rateCode is defined  %}
+                <h4>{{ 'book.room'|trans }}: {{ hotel.HotelRoomResponse.rateDescription }}</h4>
                 <dl class="other-details">
                     <dt class="total-price">
                     {{ 'book.totalPrice'|trans }}
                     <br><small>{{ 'book.taxes'|trans }}</small>
                     </dt>
                     <dd class="total-price-value">
-                        {{ room.RateInfos.RateInfo.ChargeableRateInfo['@total'] }} {{ room.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode'] }}
+                        {{ hotel.HotelRoomResponse.RateInfos.RateInfo.ChargeableRateInfo['@total'] }} {{ hotel.HotelRoomResponse.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode'] }}
                     </dd>
                 </dl>
-            {% endfor %}
-        {% endif %}
-    </div>
-    <div class="travelo-box contact-box">
-        <p>{{ hotel.checkInInstructions|raw }}</p>
-    </div>
+            {% else %}
+                {% for room in hotel.HotelRoomResponse if room.rateCode== rateCode %}
+                    <h4>{{ 'book.room'|trans }}: {{ room.rateDescription }}</h4>
+                    <dl class="other-details">
+                        <dt class="total-price">
+                        {{ 'book.totalPrice'|trans }}
+                        <br><small>{{ 'book.taxes'|trans }}</small>
+                        </dt>
+                        <dd class="total-price-value">
+                            {{ room.RateInfos.RateInfo.ChargeableRateInfo['@total'] }} {{ room.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode'] }}
+                        </dd>
+                    </dl>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="travelo-box contact-box">
+            <p>{{ hotel.checkInInstructions|raw }}</p>
+        </div>
+    {% endif %}
 </div>

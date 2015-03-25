@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class DetailsController extends Controller
 {
-
     public function indexAction($idhotel, $stars, $currency, $arrivalDate, $departureDate, $room1, $room2, $room3, $room4, $room5)
     {
         $session=$this->getRequest()->getSession();

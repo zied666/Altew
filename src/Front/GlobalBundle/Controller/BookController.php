@@ -39,12 +39,13 @@ class BookController extends Controller
                                     'rateCode'      =>$rateCode,
                                     'chargeableRate'=>$chargeableRate
                 )));
-            }else
+            }
+            else
             {
                 $currency=$request->get("currencyCode");
                 $json=$this->expediaDetailsHotel($idhotel, $currency, $arrivalDate, $departureDate, $room1, $room2, $room3, $room4, $room5);
-                $href=$Helper->getHrefTravelNow($json['HotelRoomAvailabilityResponse']['HotelRoomResponse'],$rateCode);
-                $session->set('href',  str_replace("55505", "347646", str_replace(";", "&", $href)));
+                $href=$Helper->getHrefTravelNow($json['HotelRoomAvailabilityResponse']['HotelRoomResponse'], $rateCode);
+                $session->set('href', str_replace("55505", "347646", str_replace(";", "&", $href)));
                 return $this->redirect($this->generateUrl("TravelNow"));
             }
         }
@@ -120,8 +121,27 @@ class BookController extends Controller
     public function bookAction($idhotel, $stars, $currency, $arrivalDate, $departureDate, $room1, $room2, $room3, $room4, $room5, $rateKey, $roomTypeCode, $rateCode, $chargeableRate)
     {
         $Helper=new Helper();
-        $json=$this->expediaDetailsHotel($idhotel, $currency, $arrivalDate, $departureDate, $room1, $room2, $room3, $room4, $room5);
         $session=$this->getRequest()->getSession();
+        $json=$this->container->get('expedia')->DetailsHotel($idhotel, $currency, $arrivalDate, $departureDate, $room1, $room2, $room3, $room4, $room5);
+        if(isset($json['HotelRoomAvailabilityResponse']['EanWsError']))
+        {
+            return $this->redirect($this->generateUrl("Booking", array(
+                                'idhotel'       =>$idhotel,
+                                'stars'       =>$stars,
+                                'currency'      =>$currency,
+                                'arrivalDate'   =>$arrivalDate,
+                                'departureDate' =>$departureDate,
+                                'room1'         =>$room1,
+                                'room2'         =>$room2,
+                                'room3'         =>$room3,
+                                'room4'         =>$room4,
+                                'room5'         =>$room5,
+                                'rateKey'       =>$rateKey,
+                                'roomTypeCode'  =>$roomTypeCode,
+                                'rateCode'      =>$rateCode,
+                                'chargeableRate'=>$chargeableRate,
+            )));
+        }
         $nights=(strtotime($Helper->decodeUrlDate($departureDate))-strtotime($Helper->decodeUrlDate($arrivalDate)))/86400;
         $rooms=$Helper->getRooms($room1, $room2, $room3, $room4, $room5);
         return $this->render('FrontGlobalBundle:book:book.html.twig', array(
@@ -160,34 +180,6 @@ class BookController extends Controller
         $session=$this->getRequest()->getSession();
         $session->set('href', $this->getRequest()->get("href"));
         return new Response('ok');
-    }
-
-    public function expediaDetailsHotel($idhotel, $currency, $arrivalDate, $departureDate, $room1, $room2, $room3, $room4, $room5)
-    {
-        $session=$this->getRequest()->getSession();
-        $Helper=new Helper();
-        $url=$this->container->getParameter('urlHotel');
-        $url .="currencyCode=".$currency;
-        $url .="&minorRev=".$this->container->getParameter('minorRev');
-        $url .="&cid=".$this->container->getParameter('cid');
-        $url .="&apiKey=".$this->container->getParameter('apiKey');
-        $url .="&customerUserAgent=".$this->container->getParameter('customerUserAgent');
-        $url .="&customerIpAddress=".$_SERVER['REMOTE_ADDR'];
-        $url .="&locale=".$this->getRequest()->getLocale();
-        if($session->has('customerSessionId'))
-            $url .="&customerSessionId=".$session->get('customerSessionId');
-        $url .="&arrivalDate=".$Helper->decodeUrlDate($arrivalDate);
-        $url .="&departureDate=".$Helper->decodeUrlDate($departureDate);
-        $url .="&hotelId=".$idhotel;
-        $url .="&includeDetails=true";
-        $url .="&includeRoomImages=true";
-        $url .="&options=HOTEL_DETAILS,ROOM_TYPES,ROOM_AMENITIES,PROPERTY_AMENITIES,HOTEL_IMAGES,SUPPLIERS";
-        for($i=1; $i<=5; $i++)
-        {
-            if(${"room".$i}!=0)
-                $url.="&room".$i."=".${"room".$i};
-        }
-        return $Helper->url_get_contents($url);
     }
 
 }

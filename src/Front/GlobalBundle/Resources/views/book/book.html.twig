@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row">
             <div id="main" class="col-sms-6 col-sm-8 col-md-9">
+                {% include '::alert.html.twig' %}
                 <div class="booking-section travelo-box">
                     <form action="{{ path('validation',{'idhotel':idhotel,'stars':stars,'currency':currency,'arrivalDate':arrivalDate2,'departureDate':departureDate2,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'rateKey':rateKey,'roomTypeCode':roomTypeCode,'rateCode':rateCode,'chargeableRate':chargeableRate}) }}" method="POST" class="booking-form">
                         <div class="person-information">
@@ -316,32 +317,34 @@
                                         <label>{{ 'book.lastName'|trans }}</label>
                                         <input type="text" class="input-text full-width" name="lastName{{ loop.index }}" required/>
                                     </div>
-                                    <div class="col-sm-4 col-md-4">
-                                        <label>{{ 'book.beddingPreference'|trans }}</label>
-                                        <div class="selector">
-                                            <select class="full-width" name="bed{{ loop.index }}">
-                                                {% if hotel.HotelRoomResponse.rateCode is defined %}
-                                                    {% if  hotel.HotelRoomResponse.BedTypes['@size']==1 %}
-                                                        <option value="{{ hotel.HotelRoomResponse.BedTypes.BedType['@id'] }}" >{{ hotel.HotelRoomResponse.BedTypes.BedType.description }}</option>
-                                                    {% else %}
-                                                        {% for bed in  hotel.HotelRoomResponse.BedTypes.BedType %}
-                                                            <option value="{{ bed['@id'] }}" >{{ bed.description }}</option>
-                                                        {% endfor %}
-                                                    {% endif %}
-                                                {% else %}
-                                                    {% for room in hotel.HotelRoomResponse if room.rateCode == rateCode %}
-                                                        {% if room.BedTypes['@size'] ==1 %}
-                                                            <option value="{{ room.BedTypes.BedType['@id'] }}" >{{ room.BedTypes.BedType.description }}</option>
+                                    {% if hotel.HotelRoomResponse is defined %}
+                                        <div class="col-sm-4 col-md-4">
+                                            <label>{{ 'book.beddingPreference'|trans }}</label>
+                                            <div class="selector">
+                                                <select class="full-width" name="bed{{ loop.index }}">
+                                                    {% if hotel.HotelRoomResponse.rateCode is defined %}
+                                                        {% if  hotel.HotelRoomResponse.BedTypes['@size']==1 %}
+                                                            <option value="{{ hotel.HotelRoomResponse.BedTypes.BedType['@id'] }}" >{{ hotel.HotelRoomResponse.BedTypes.BedType.description }}</option>
                                                         {% else %}
-                                                            {% for bed in room.BedTypes.BedType %}
+                                                            {% for bed in  hotel.HotelRoomResponse.BedTypes.BedType %}
                                                                 <option value="{{ bed['@id'] }}" >{{ bed.description }}</option>
                                                             {% endfor %}
                                                         {% endif %}
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </select>
+                                                    {% else %}
+                                                        {% for room in hotel.HotelRoomResponse if room.rateCode == rateCode %}
+                                                            {% if room.BedTypes['@size'] ==1 %}
+                                                                <option value="{{ room.BedTypes.BedType['@id'] }}" >{{ room.BedTypes.BedType.description }}</option>
+                                                            {% else %}
+                                                                {% for bed in room.BedTypes.BedType %}
+                                                                    <option value="{{ bed['@id'] }}" >{{ bed.description }}</option>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         {% endfor %}

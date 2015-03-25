@@ -1,15 +1,17 @@
 {% extends "::base.html.twig" %}
-{% block title %}{{ hotel.hotelName }}{% endblock %}
+{% block title %}{% if hotel.hotelName is defined %}{{ hotel.hotelName }}{% else %}Error{% endif %}{% endblock %}
 {% block body %}
     {% set Stars = (stars/5)*100 %}
     <div class="container">
         <div class="row">
             <div id="main" class="col-md-9">
-                <div class="tab-container style1" id="hotel-main-content">
-                    <div class="tab-content">
-                        {% include 'FrontGlobalBundle:hotel:slider.html.twig' %}
+                {% if hotel.hotelName is defined %}
+                    <div class="tab-container style1" id="hotel-main-content">
+                        <div class="tab-content">
+                            {% include 'FrontGlobalBundle:hotel:slider.html.twig' %}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
                 <div id="hotel-features" class="tab-container">
                     <ul class="tabs">
                         <li class="active"><a href="#hotel-availability" data-toggle="tab">{{ 'hotel.availability'|trans }}</a></li>
@@ -18,13 +20,17 @@
                     </ul>
                     <div class="tab-content">
                         {% include 'FrontGlobalBundle:hotel:rooms.html.twig' %}
-                        {% include 'FrontGlobalBundle:hotel:description.html.twig' %}
-                        {% include 'FrontGlobalBundle:hotel:amenities.html.twig' %}
+                        {% if hotel.hotelName is defined %}
+                            {% include 'FrontGlobalBundle:hotel:description.html.twig' %}
+                            {% include 'FrontGlobalBundle:hotel:amenities.html.twig' %}
+                        {% endif%}
                     </div>
 
                 </div>
             </div>
-            {% include 'FrontGlobalBundle:hotel:sidebar.html.twig' %}
+            {% if hotel.hotelName is defined %}
+                {% include 'FrontGlobalBundle:hotel:sidebar.html.twig' %}
+            {% endif%}
         </div>
     </div>
 {% endblock %}
