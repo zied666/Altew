@@ -5,5 +5,5 @@
 /nbproject/
 /vendor/
 /app/config/parameters.yml
-composer.phar
-composer.lock 
+/composer.phar
+/composer.lock 
