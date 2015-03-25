@@ -37,11 +37,7 @@
         <div>
             <p>{{ room.RoomType.descriptionLong|replace({'<br /><br />': '<br />'})|raw }}</p>
             <div class="action-section">
-{#                {% if country=="Tunisia" or country=="" %}#}
-                    <a href="{{ path('currency',{'idhotel':idhotel,'stars':stars,'currency':currency,'arrivalDate':arrivalDate2,'departureDate':departureDate2,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'rateKey':rateKey,'roomTypeCode':roomTypeCode,'rateCode':rateCode,'chargeableRate':chargeableRate}) }}" class="button btn-small dark-blue1 full-width text-center">{{ 'hotel.room.booknow'|trans }}</a>
-{#                {% else %}    #}
-{#                    <a href="javascript:void(0)" data-href="{{ room.deepLink|replace({'55505':'347646',';':'&'}) }}" class="button btn-small dark-blue1 full-width text-center TravelNowBook ">Travel Now</a>#}
-{#                {% endif %}#}
+                <a href="{{ path('currency',{'idhotel':idhotel,'stars':stars,'currency':currency,'arrivalDate':arrivalDate2,'departureDate':departureDate2,'room1':room1,'room2':room2,'room3':room3,'room4':room4,'room5':room5,'rateKey':rateKey,'roomTypeCode':roomTypeCode,'rateCode':rateCode,'chargeableRate':chargeableRate}) }}" class="button btn-small dark-blue1 full-width text-center">{{ 'hotel.room.booknow'|trans }}</a>
             </div>
         </div>
     </div>

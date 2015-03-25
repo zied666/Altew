@@ -20,8 +20,12 @@ services:
     expedia:
         class: Front\GlobalBundle\Services\Expedia
         arguments: 
+            - @session
+            - @request
             - @security.context
             - @doctrine.orm.entity_manager
+            - %url%
+            - %urlHotel%
             - %urlReservation%
             - %minorRev%
             - %cid%
@@ -34,6 +38,7 @@ services:
             - %creditCardIdentifier%
             - %creditCardExpirationMonth%
             - %creditCardExpirationYear%
+        scope:     request
     devise:
         class: Front\GlobalBundle\Services\Devise
         

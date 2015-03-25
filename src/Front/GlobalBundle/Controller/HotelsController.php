@@ -22,7 +22,7 @@ class HotelsController extends Controller
         }
         $Helper=new Helper();
         $Expedia=new Expedia();
-        $json=$this->expediaListeHotel($currency, $destination, $arrivalDate, $departureDate, $room1, $room2, $room3, $room4, $room5, $page, $sort, $search, $stars, $rate);
+        $json=$this->container->get("expedia")->listHotels($currency, $destination, $arrivalDate, $departureDate, $room1, $room2, $room3, $room4, $room5, $page, $sort, $search, $stars, $rate);
         if($stars!='')
         {
             $starss=explode("-", $stars);
@@ -149,60 +149,4 @@ class HotelsController extends Controller
         else
             return $this->redirect($this->generateUrl("front_global_homepage"));
     }
-
-    public function expediaListeHotel($currency, $destination, $arrivalDate, $departureDate, $room1, $room2, $room3, $room4, $room5, $page, $sort, $search, $stars, $rate)
-    {
-        $session=$this->getRequest()->getSession();
-        $Helper=new Helper();
-        $url=$this->container->getParameter('url');
-        $url .="currencyCode=".$currency;
-        $url .="&minorRev=".$this->container->getParameter('minorRev');
-        $url .="&cid=".$this->container->getParameter('cid');
-        $url .="&numberOfResults=20";
-        $url .="&apiKey=".$this->container->getParameter('apiKey');
-        $url .="&customerUserAgent=".$this->container->getParameter('customerUserAgent');
-        $url .="&customerIpAddress=".$_SERVER['REMOTE_ADDR'];
-        $url .="&locale=".$this->getRequest()->getLocale();
-        if($session->has('customerSessionId'))
-            $url .="&customerSessionId=".$session->get('customerSessionId');
-        if($page!=1)
-        {
-            $url .="&cacheKey=".$session->get("cacheKey_".$page);
-            $url .="&cacheLocation=".$session->get("cacheLocation_".$page);
-        }
-        else
-        {
-            $url .="&destinationString=".$destination;
-            $url .="&supplierCacheTolerance=".$this->container->getParameter('supplierCacheTolerance');
-            $url .="&arrivalDate=".$Helper->decodeUrlDate($arrivalDate);
-            $url .="&departureDate=".$Helper->decodeUrlDate($departureDate);
-            for($i=1; $i<=5; $i++)
-            {
-                if(${"room".$i}!=0)
-                    $url.="&room".$i."=".${"room".$i};
-            }
-            if($sort!='NOSORT')
-                $url .="&sort=".$sort;
-            if($rate!='')
-            {
-                $rates=explode('-', $rate);
-                if($rates[0]!='')
-                    $url .="&minRate=".$rates[0];
-                if($rates[1]!='')
-                    $url .="&maxRate=".$rates[1];
-            }
-            if($stars!='')
-            {
-                $starss=explode('-', $stars);
-                if($starss[0]!='')
-                    $url .="&minStarRating=".$starss[0];
-                if($starss[1]!='')
-                    $url .="&maxStarRating=".$starss[1];
-            }
-            if($search!='')
-                $url .="&propertyName=".$search;
-        }
-        return $Helper->url_get_contents($url);
-    }
-
 }
