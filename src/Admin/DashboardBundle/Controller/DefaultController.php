@@ -19,7 +19,7 @@ class DefaultController extends Controller
         $reserP=$em->getRepository("FrontGlobalBundle:Reservation")->getReservationPaye();
         $reserNP=$em->getRepository("FrontGlobalBundle:Reservation")->getReservationNotPaye();
         $findreservations=$em->getRepository("FrontGlobalBundle:Reservation")->allOrderByDate();
-        $reservations=$this->get('knp_paginator')->paginate($findreservations, $request->query->get('page', 1), 10);
+        $reservations=$this->get('knp_paginator')->paginate($findreservations,$page, 2);
         return $this->render('AdminDashboardBundle:Default:index.html.twig', array(
                     'reserP'      =>$reserP,
                     'reserNP'     =>$reserNP,
