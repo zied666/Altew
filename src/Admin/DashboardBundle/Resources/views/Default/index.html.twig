@@ -1,0 +1,110 @@
+{% extends ":admin:base.html.twig" %}
+{% block title %}Dashboard{% endblock %}
+{% block body %}
+    <div class="tab-container full-width-style arrow-left dashboard">
+        <ul class="tabs">
+            <li class="active"><a data-toggle="tab" href="#booking"><i class="soap-icon-anchor circle"></i>Dashboard</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="booking" class="tab-pane fade in active">
+                <h1 class="no-margin skin-color">Hi {{app.user.username }}, Welcome to Wetla Dashboard!</h1>
+                <br />
+                <div class="row block" id="dashboard">
+                    <div class="col-sm-6 col-md-6">
+                        <a href="javascript:void(0)">
+                            <div class="fact blue">
+                                <div class="numbers counters-box">
+                                    <dl>
+                                        <dt class="display-counter" data-value="{{ reserP|length }}">0</dt>
+                                        <dd>Hotels to Stay</dd>
+                                    </dl>
+                                    <i class="icon soap-icon-hotel"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <a href="javascript:void(0)">
+                            <div class="fact yellow">
+                                <div class="numbers counters-box">
+                                    <dl>
+                                        <dt class="display-counter" data-value="{{ reserNP|length }}">0</dt>
+                                        <dd>Hotels to Stay</dd>
+                                    </dl>
+                                    <i class="icon soap-icon-hotel"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <h2>Reservation list</h2>
+                {% if false %}
+                    <div class="filter-section gray-area clearfix">
+                        <form>
+                            <label class="radio radio-inline">
+                                <input type="radio" name="filter" checked="checked" />
+                                All Types
+                            </label>
+                            <label class="radio radio-inline">
+                                <input type="radio" name="filter" />
+                                Hotels
+                            </label>
+                            <label class="radio radio-inline">
+                                <input type="radio" name="filter" />
+                                Flights
+                            </label>
+                            <label class="radio radio-inline">
+                                <input type="radio" name="filter" />
+                                Cars
+                            </label>
+                            <label class="radio radio-inline">
+                                <input type="radio" name="filter" />
+                                Cruises
+                            </label>
+                        </form>
+                    </div>
+                {% endif %}
+                <div class="booking-history">
+                    {% for reservation in reservations %}
+                        {% set adults=0 %}
+                        {% set kids=0 %}
+                        {% for room in reservation.rooms %}
+                            {% set adults = adults + room.ocupation|occupation('A')  %}
+                            {% set kids= kids + room.ocupation|occupation('K')  %}
+                        {% endfor %}
+                        <div class="booking-info clearfix {% if reservation.param is empty %}cancelled{% endif %}">
+                            <div class="date">
+                                <label class="month">{{ reservation.dateReservation|date('M') }}</label>
+                                <label class="date">{{ reservation.dateReservation|date('d') }}</label>
+                                <label class="day">{{ reservation.dateReservation|date('D') }}</label>
+                            </div>
+                            <h4 class="box-title"><i class="icon soap-icon-hotel blue-color circle">
+                                </i>{{ reservation.firstName~' '~reservation.lastName }}
+                                <small> {{ reservation.param }} </small>
+                            </h4>
+                            <dl class="info">
+                                <dt>Arrivale</dt>
+                                <dd>{{ reservation.arrivaleDate|date('D, M d, Y') }}</dd>
+                                <dt>Departure</dt>
+                                <dd>{{ reservation.departureDate|date('D, M d, Y') }}</dd>
+                            </dl>
+                            <dl class="info">
+                                <dt>Rooms Details</dt>
+                                <dd>Rooms : {{ reservation.rooms|length }}</dd>
+                                <dd>Adults: {{ adults }}</dd>
+                                <dd>Kids  : {{ kids }}</dd>
+                            </dl>
+                            <dl class="info">
+                                <dt>Price {{ reservation.currency }}</dt>
+                                <dd>{{ reservation.chargeableRate }}</dd>
+                                <dt>Price TND</dt>
+                                <dd>{{ reservation.montant }}</dd>
+                            </dl>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

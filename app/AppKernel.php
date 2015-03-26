@@ -5,9 +5,10 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles=array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
@@ -17,14 +18,17 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Front\GlobalBundle\FrontGlobalBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Admin\DashboardBundle\AdminDashboardBundle(),
         );
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
-            $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-            $bundles[] = new CoreSphere\ConsoleBundle\CoreSphereConsoleBundle();
+        if(in_array($this->getEnvironment(), array('dev', 'test')))
+        {
+            $bundles[]=new Symfony\Bundle\DebugBundle\DebugBundle();
+            $bundles[]=new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
+            $bundles[]=new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
+            $bundles[]=new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles[]=new CoreSphere\ConsoleBundle\CoreSphereConsoleBundle();
         }
 
         return $bundles;
@@ -34,4 +38,5 @@ class AppKernel extends Kernel
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
+
 }

@@ -1,3 +1,10 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+admin_dashboard:
+    resource: "@AdminDashboardBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 accueil:
     resource: "@FrontGlobalBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/

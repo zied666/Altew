@@ -17,6 +17,10 @@ parameters:
     creditCardExpirationYear: 2015
     
 services:
+    upper:
+      class: Admin\DashboardBundle\Twig\Extension\OccupationExtension
+      tags:
+        - { name: twig.extension }
     expedia:
         class: Front\GlobalBundle\Services\Expedia
         arguments: 

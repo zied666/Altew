@@ -17,6 +17,13 @@
                     <li {% if app.request.getLocale()=='fr' %}class="active"{% endif %}><a href="{{ path('front_global_homepage',{'_locale':'fr'}) }}">Français</a></li>
                 </ul>
             </li>
+            {% if is_granted("ROLE_ADMIN") %}
+                <li>
+                    <a href="{{ path('dashboard') }}">
+                        Welcome {{app.user.username }}
+                    </a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </div>

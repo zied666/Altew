@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->  <html> <!--<![endif]-->
+    <head>
+        <!-- Page Title -->
+        <title>{% block title %}{% endblock %}</title>
+        <!-- Meta Tags -->
+        <meta charset="utf-8">
+        <meta name="keywords" content="HTML5 Template" />
+        <meta name="description" content="Travelo | Responsive HTML5 Travel Template">
+        <meta name="author" content="SoapTheme">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Theme Styles -->
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,500,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="components/flexslider/flexslider.css') }}" media="screen" />
+        <!-- Main Style -->
+        <link id="main-style" rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <!-- Custom Styles -->
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        <!-- Updated Styles -->
+        <link rel="stylesheet" href="{{ asset('css/updates.css') }}">
+        <!-- Responsive Styles -->
+        <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+        <!-- CSS for IE -->
+        <!--[if lte IE 9]>
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/ie.css') }}" />
+        <![endif]-->
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js') }}"></script>
+          <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js') }}"></script>
+        <![endif]-->
+    </head>
+    <body class="dashboard style1">
+        <div id="page-wrapper">
+            {% include ':admin:header.html.twig' %}
+            <section id="content" class="">
+                <div class="container">
+                    {% block body %}{% endblock %}
+                </div>
+        </section>
+        {% include ':admin:footer.html.twig' %}
+    </div>
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.noconflict.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/modernizr.2.7.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.placeholder.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-ui.1.10.4.min.js') }}"></script>
+
+    <!-- Twitter Bootstrap -->
+    <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+
+    <!-- Flex Slider -->
+    <script type="text/javascript" src="{{ asset('components/flexslider/jquery.flexslider-min.js') }}"></script>
+
+    <script type="text/javascript">
+        enableChaser = 0;
+    </script>
+
+    <!-- waypoint -->
+    <script type="text/javascript" src="{{ asset('js/waypoints.min.js') }}"></script>
+
+    <!-- load page Javascript -->
+    <script type="text/javascript" src="{{ asset('js/theme-scripts.js') }}"></script>
+
+    <script type="text/javascript">
+        tjq(document).ready(function () {
+            tjq("#profile .edit-profile-btn").click(function (e) {
+                e.preventDefault();
+                tjq(".view-profile").fadeOut();
+                tjq(".edit-profile").fadeIn();
+            });
+
+            setTimeout(function () {
+                tjq(".notification-area").append('<div class="info-box block"><span class="close"></span><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus ab quis a dolorem, placeat eos doloribus esse repellendus quasi libero illum dolore. Esse minima voluptas magni impedit, iusto, obcaecati dignissimos.</p></div>');
+            }, 10000);
+        });
+        tjq('a[href="#profile"]').on('shown.bs.tab', function (e) {
+            tjq(".view-profile").show();
+            tjq(".edit-profile").hide();
+        });
+    </script>
+</body>
+</html>
+
