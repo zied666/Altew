@@ -1,3 +1,5 @@
 dashboard:
-    path:     /
-    defaults: { _controller: AdminDashboardBundle:Default:index }
+    path:     /{page}
+    defaults: { _controller: AdminDashboardBundle:Default:index,page:1 }
+    requirements:
+        page:  \d+

@@ -26,5 +26,12 @@ class ReservationRepository extends EntityRepository
         $query      ->where($query->expr()->isNotNull('a.param'));
         return $query->getQuery()->getResult();
     }
+    
+    public function allOrderByDate()
+    {
+        $query=$this->createQueryBuilder('a')
+                    ->orderBy("a.dateReservation","desc");
+        return $query->getQuery()->getResult();
+    }
 
 }

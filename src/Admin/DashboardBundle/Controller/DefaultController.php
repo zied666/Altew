@@ -7,34 +7,20 @@ use Front\GlobalBundle\Entity\Reservation;
 use Front\GlobalBundle\Entity\Room;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Front\GlobalBundle\Entity\ReservationRepository;
-use Admin\DashboardBundle\Form\UserType;
 
 class DefaultController extends Controller
 {
 
-    public function indexAction()
+    public function indexAction($page)
     {
         $em=$this->getDoctrine()->getManager();
-        $session=$this->getRequest()->getSession();
+        $request=$this->getRequest();
+        $paginator=$this->get('knp_paginator');
         $reserP=$em->getRepository("FrontGlobalBundle:Reservation")->getReservationPaye();
         $reserNP=$em->getRepository("FrontGlobalBundle:Reservation")->getReservationNotPaye();
-        $reservations=$em->getRepository("FrontGlobalBundle:Reservation")->findAll();
-        $user=$this->container->get('security.context')->getToken()->getUser();
-        $form=$this->createForm(new UserType(), $user);
-        $request=$this->getRequest();
-        if($request->isMethod('POST'))
-        {
-            $form->bind($request);
-            if($form->isValid())
-            {
-                $user=$form->getData();
-                $em->persist($user);
-                $em->flush();
-                return $this->redirect($this->generateUrl("dashboard", array('type'=>'pass')));
-            }
-        }
+        $findreservations=$em->getRepository("FrontGlobalBundle:Reservation")->allOrderByDate();
+        $reservations=$this->get('knp_paginator')->paginate($findreservations, $request->query->get('page', 1), 10);
         return $this->render('AdminDashboardBundle:Default:index.html.twig', array(
-                    'form'        =>$form->createView(),
                     'reserP'      =>$reserP,
                     'reserNP'     =>$reserNP,
                     'reservations'=>$reservations
