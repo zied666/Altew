@@ -14,8 +14,6 @@ class DefaultController extends Controller
     public function indexAction($page)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
-        if(!$user)
-            return $this->redirect($this->generateUrl("fos_user_security_logout"));
         $em=$this->getDoctrine()->getManager();
         $request=$this->getRequest();
         $paginator=$this->get('knp_paginator');

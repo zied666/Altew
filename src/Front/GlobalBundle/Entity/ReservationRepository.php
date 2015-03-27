@@ -13,14 +13,14 @@ use Doctrine\ORM\EntityRepository;
 class ReservationRepository extends EntityRepository
 {
 
-    public function getReservationPaye()
+    public function getReservationNotPaye()
     {
         $query=$this->createQueryBuilder('a');
         $query      ->where($query->expr()->isNull('a.param'));
         return $query->getQuery()->getResult();
     }
     
-    public function getReservationNotPaye()
+    public function getReservationPaye()
     {
         $query=$this->createQueryBuilder('a');
         $query      ->where($query->expr()->isNotNull('a.param'));
