@@ -43,7 +43,7 @@ class BookController extends Controller
             else
             {
                 $currency=$request->get("currencyCode");
-                $json=$this->expediaDetailsHotel($idhotel, $currency, $arrivalDate, $departureDate, $room1, $room2, $room3, $room4, $room5);
+                $json=$this->container->get('expedia')->DetailsHotel($idhotel, $currency, $arrivalDate, $departureDate, $room1, $room2, $room3, $room4, $room5);
                 $href=$Helper->getHrefTravelNow($json['HotelRoomAvailabilityResponse']['HotelRoomResponse'], $rateCode);
                 $session->set('href', str_replace("55505", "347646", str_replace(";", "&", $href)));
                 return $this->redirect($this->generateUrl("TravelNow"));

@@ -1,7 +1,20 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
+    #parametre Expedia
+    url: http://dev.api.ean.com/ean-services/rs/hotel/v3/list?
+    urlHotel: http://dev.api.ean.com/ean-services/rs/hotel/v3/avail?
+    urlReservation: https://book.api.ean.com/ean-services/rs/hotel/v3/res?
+    minorRev: 26
+    cid: 347646
+    apiKey: akpxx88679sjtpumauavjt4u
+    customerUserAgent : MOBILE_APP
+    supplierCacheTolerance: MED
+    supplierType: E
+    #Credit Card
+    creditCardType: MC
+    creditCardNumber: 5401999999999999
+    creditCardIdentifier: 123
+    creditCardExpirationMonth: 11
+    creditCardExpirationYear: 2015
 
 services:
 #    service_name:
