@@ -1,0 +1,21 @@
+{% extends ":admin:base.html.twig" %}
+{% block body %}  
+    <div class="tab-container full-width-style arrow-left dashboard">
+        <div class="tab-content">
+            <div id="booking" class="tab-pane fade in active">
+                {% for type, messages in app.session.flashbag.all() %}
+                    {% for message in messages %}
+                        <div class="flash-{{ type }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <div>
+                    {% block fos_user_content %}
+                    {% endblock fos_user_content %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
