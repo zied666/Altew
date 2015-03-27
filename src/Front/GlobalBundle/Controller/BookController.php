@@ -143,6 +143,7 @@ class BookController extends Controller
             )));
         }
         $nights=(strtotime($Helper->decodeUrlDate($departureDate))-strtotime($Helper->decodeUrlDate($arrivalDate)))/86400;
+        $nights=round($nights);
         $rooms=$Helper->getRooms($room1, $room2, $room3, $room4, $room5);
         return $this->render('FrontGlobalBundle:book:book.html.twig', array(
                     'hotel'         =>$json['HotelRoomAvailabilityResponse'],

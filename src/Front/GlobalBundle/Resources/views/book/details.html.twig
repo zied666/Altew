@@ -63,10 +63,16 @@
                     <dl class="other-details">
                         <dt class="total-price">
                         {{ 'book.totalPrice'|trans }}
-                        <br><small>{{ 'book.taxes'|trans }}</small>
                         </dt>
                         <dd class="total-price-value">
                             {{ room.RateInfos.RateInfo.ChargeableRateInfo['@total'] }} {{ room.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode'] }}
+                        </dd>
+                        <dt class="total-price">
+                        {{ 'book.totalPrice'|trans }}
+                        <br><small>{{ 'book.taxes'|trans }}</small>
+                        </dt>
+                        <dd class="total-price-value">
+                            {{ room.RateInfos.RateInfo.ChargeableRateInfo['@total']|convert(room.RateInfos.RateInfo.ChargeableRateInfo['@currencyCode'],'TND') }} TND
                         </dd>
                     </dl>
                 {% endfor %}
