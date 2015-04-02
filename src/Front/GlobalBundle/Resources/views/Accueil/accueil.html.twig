@@ -169,15 +169,11 @@
 
             })
             tjq('#HotelForm').on('submit', function (e) {
-                var fullDate = new Date()
-                var twoDigitMonth = ((fullDate.getMonth().length + 1) === 1) ? (fullDate.getMonth() + 1) : '0' + (fullDate.getMonth() + 1);
-                var twoDigitDate = ((fullDate.getDate().length + 1) === 1) ? (fullDate.getDate()) :  (fullDate.getDate());
-                var currentDate = fullDate.getFullYear() + "-" + twoDigitMonth + "-" + twoDigitDate;
                 var arrivalDate = tjq('#arrivalDate').val().split("/");
                 var arrival = arrivalDate[2] + "-" + arrivalDate[0] + "-" + arrivalDate[1]
                 var departureDate = tjq('#departureDate').val().split("/");
                 var departure = departureDate[2] + "-" + departureDate[0] + "-" + departureDate[1]
-                if (arrival <= currentDate)
+                if (arrival <= "{{ 'now'|date('Y-m-d') }}")
                 {
                     e.preventDefault();
                     tjq(".alert-error").show();
@@ -191,7 +187,7 @@
                 }
                 else
                     return true;
-                                })
-                            })
+            })
+        })
     </script>
 {% endblock %}
